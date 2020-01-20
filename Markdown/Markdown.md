@@ -1,6 +1,8 @@
 # MarkDown 格式
 
-用於寫作，可在 Git 上撰寫， Filename 後加上 .md 或 .markdown
+用於寫作，語法全由標點符號所組成
+
+在 Github 上撰寫， 文檔後綴加上 *.md* 或 *.markdown*
 
 # This is an H1
 
