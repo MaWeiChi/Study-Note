@@ -1,0 +1,15 @@
+Development environment (Linux, Debian)
+- file system
+- permission
+- folder structure
+- package system
+- networking
+- libraries, linking
+- kernel vs. OS
+Networking fundamentals
+Programming & coding
+- Object Oriented Programming
+- Linux/Unix Programming
+- Languages: shell script, golang, python, C
+- Tools: Git, docker, make, autoconf/CMake
+- Editor: vscode, vim, nano, emacs, ...

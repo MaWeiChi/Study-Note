@@ -1,7 +1,6 @@
 # Docker Container
 
 
-
 ## 1. Concept
 
 
@@ -705,9 +704,13 @@ docker-desktop:~# ls /var/lib/docker/volumes/
 
 ```
 
-
+ 
 
 ## External access Container
+
+
+
+
 
 
 
@@ -744,4 +747,426 @@ $ docker port 475e667ba4b4
 $ docker port 475e667ba4b4 8888
 0.0.0.0:32769
 ```
+
+
+
+## Docker Compose
+
+```
+$ mkdir composetest
+$ cd composetest
+```
+
+Create a file called `app.py` in `composetest` directory and paste this in:
+
+```
+import time
+
+import redis
+from flask import Flask
+
+app = Flask(__name__)
+cache = redis.Redis(host='redis', port=6379)
+
+
+def get_hit_count():
+    retries = 5
+    while True:
+        try:
+            return cache.incr('hits')
+        except redis.exceptions.ConnectionError as exc:
+            if retries == 0:
+                raise exc
+            retries -= 1
+            time.sleep(0.5)
+
+
+@app.route('/')
+def hello():
+    count = get_hit_count()
+    return 'Hello World! I have been seen {} times.\n'.format(count)
+```
+
+Create another file called `requirements.txt` :
+
+```
+flask
+redis
+```
+
+Create a Dockerfile :
+
+```
+FROM python:3.7-alpine
+WORKDIR /code
+ENV FLASK_APP app.py
+ENV FLASK_RUN_HOST 0.0.0.0
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["flask", "run"]
+```
+
+his tells Docker to:
+
+- Build an image starting with the Python 3.7 image.
+- Set the working directory to `/code`.
+- Set environment variables used by the `flask` command.
+- Install gcc so Python packages such as MarkupSafe and SQLAlchemy can compile speedups.
+- Copy `requirements.txt` and install the Python dependencies.
+- Copy the current directory `.` in the project to the workdir `.` in the image.
+- Set the default command for the container to `flask run`.
+
+Define services in a Compose file name `docker-compose.yaml` :
+
+```
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+  redis:
+    image: "redis:alpine"
+```
+
+Build and run app with Compose
+
+```
+$ docker-compose up
+...
+redis_1  | 1:M 16 Mar 2020 01:09:37.600 * Ready to accept connections
+web_1    |  * Serving Flask app "app.py"
+web_1    |  * Environment: production
+web_1    |    WARNING: This is a development server. Do not use it in a production deployment.
+web_1    |    Use a production WSGI server instead.
+web_1    |  * Debug mode: off
+web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+```
+
+See the message with a browser on `localhost:5000`
+
+```
+Hello World! I have been seen 1 times.
+```
+
+Refeash the browser:
+
+```
+Hello World! I have been seen 2 times.
+```
+
+Use another terminal :
+
+```
+$ docker image ls
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+composetest_web         latest              c98d3ebe88f4       4 minutes ago       93.8MB
+redis                   alpine              d8415a415147       2 days ago	         56.1MB  
+python                  3.7-alpine          13f1d829523b       5 days ago          82.5MB
+```
+
+Edit `docker-compose.yaml` :
+
+```
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+  redis:
+    image: "redis:alpine"
+```
+
+Re-build and run the app with Compose :
+
+```
+$ docker-compose up
+redis_1  | 1:M 16 Mar 2020 01:13:52.356 * Ready to accept connections
+web_1    |  * Serving Flask app "app.py" (lazy loading)
+web_1    |  * Environment: development
+web_1    |  * Debug mode: on
+web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+web_1    |  * Restarting with stat
+web_1    |  * Debugger is active!
+web_1    |  * Debugger PIN: 148-517-396
+```
+
+Edit app.p, replace the last line with :
+
+```
+return 'Hello from Docker! I have been seen {} times.\n'.format(count)
+```
+
+Refresh the browser :
+
+```
+Hello from Docker! I have been seen 9 times.
+```
+
+
+
+Run services in the background :
+
+```
+$ docker-compose up -d
+Starting composetest_redis_1...
+Starting composetest_web_1...
+
+$ docker-compose ps
+       Name                      Command               State           Ports
+-------------------------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
+composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
+
+$ docker-compose stop
+Stopping composetest_web_1   ... done
+Stopping composetest_redis_1 ... done
+```
+
+See what environment variables are available to services:
+
+```
+$ docker-compose run web env
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=57d916c60266
+TERM=xterm
+FLASK_ENV=development
+LANG=C.UTF-8
+GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+PYTHON_VERSION=3.7.7
+PYTHON_PIP_VERSION=20.0.2
+PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d59197a3c169cef378a22428a3fa99d33e080a5d/get-pip.py
+PYTHON_GET_PIP_SHA256=421ac1d44c0cf9730a088e337867d974b91bdce4ea2636099275071878cc189e
+FLASK_APP=app.py
+FLASK_RUN_HOST=0.0.0.0
+HOME=/root
+```
+
+Remove the containers entirely :
+
+```
+$ docker-compose down --volumes
+Removing composetest_web_run_227460fd5720 ... done
+Removing composetest_web_1                ... done
+Removing composetest_redis_1              ... done
+Removing network composetest_default
+```
+
+
+
+## Docker Compose
+
+```
+$ mkdir composetest
+$ cd composetest
+```
+
+Create a file called `app.py` in `composetest` directory and paste this in:
+
+```
+import time
+
+import redis
+from flask import Flask
+
+app = Flask(__name__)
+cache = redis.Redis(host='redis', port=6379)
+
+
+def get_hit_count():
+    retries = 5
+    while True:
+        try:
+            return cache.incr('hits')
+        except redis.exceptions.ConnectionError as exc:
+            if retries == 0:
+                raise exc
+            retries -= 1
+            time.sleep(0.5)
+
+
+@app.route('/')
+def hello():
+    count = get_hit_count()
+    return 'Hello World! I have been seen {} times.\n'.format(count)
+```
+
+Create another file called `requirements.txt` :
+
+```
+flask
+redis
+```
+
+Create a Dockerfile :
+
+```
+FROM python:3.7-alpine
+WORKDIR /code
+ENV FLASK_APP app.py
+ENV FLASK_RUN_HOST 0.0.0.0
+RUN apk add --no-cache gcc musl-dev linux-headers
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["flask", "run"]
+```
+
+his tells Docker to:
+
+- Build an image starting with the Python 3.7 image.
+- Set the working directory to `/code`.
+- Set environment variables used by the `flask` command.
+- Install gcc so Python packages such as MarkupSafe and SQLAlchemy can compile speedups.
+- Copy `requirements.txt` and install the Python dependencies.
+- Copy the current directory `.` in the project to the workdir `.` in the image.
+- Set the default command for the container to `flask run`.
+
+Define services in a Compose file name `docker-compose.yaml` :
+
+```
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+  redis:
+    image: "redis:alpine"
+```
+
+Build and run app with Compose
+
+```
+$ docker-compose up
+...
+redis_1  | 1:M 16 Mar 2020 01:09:37.600 * Ready to accept connections
+web_1    |  * Serving Flask app "app.py"
+web_1    |  * Environment: production
+web_1    |    WARNING: This is a development server. Do not use it in a production deployment.
+web_1    |    Use a production WSGI server instead.
+web_1    |  * Debug mode: off
+web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+```
+
+See the message with a browser on `localhost:5000`
+
+```
+Hello World! I have been seen 1 times.
+```
+
+Refeash the browser:
+
+```
+Hello World! I have been seen 2 times.
+```
+
+Use another terminal :
+
+```
+$ docker image ls
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+composetest_web         latest              c98d3ebe88f4       4 minutes ago       93.8MB
+redis                   alpine              d8415a415147       2 days ago	         56.1MB  
+python                  3.7-alpine          13f1d829523b       5 days ago          82.5MB
+```
+
+Edit `docker-compose.yaml` :
+
+```
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    environment:
+      FLASK_ENV: development
+  redis:
+    image: "redis:alpine"
+```
+
+Re-build and run the app with Compose :
+
+```
+$ docker-compose up
+redis_1  | 1:M 16 Mar 2020 01:13:52.356 * Ready to accept connections
+web_1    |  * Serving Flask app "app.py" (lazy loading)
+web_1    |  * Environment: development
+web_1    |  * Debug mode: on
+web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+web_1    |  * Restarting with stat
+web_1    |  * Debugger is active!
+web_1    |  * Debugger PIN: 148-517-396
+```
+
+Edit app.p, replace the last line with :
+
+```
+return 'Hello from Docker! I have been seen {} times.\n'.format(count)
+```
+
+Refresh the browser :
+
+```
+Hello from Docker! I have been seen 9 times.
+```
+
+Run services in the background :
+
+```
+$ docker-compose up -d
+Starting composetest_redis_1...
+Starting composetest_web_1...
+
+$ docker-compose ps
+       Name                      Command               State           Ports
+-------------------------------------------------------------------------------------
+composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp
+composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
+
+$ docker-compose stop
+Stopping composetest_web_1   ... done
+Stopping composetest_redis_1 ... done
+```
+
+See what environment variables are available to services:
+
+```
+$ docker-compose run web env
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=57d916c60266
+TERM=xterm
+FLASK_ENV=development
+LANG=C.UTF-8
+GPG_KEY=0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
+PYTHON_VERSION=3.7.7
+PYTHON_PIP_VERSION=20.0.2
+PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d59197a3c169cef378a22428a3fa99d33e080a5d/get-pip.py
+PYTHON_GET_PIP_SHA256=421ac1d44c0cf9730a088e337867d974b91bdce4ea2636099275071878cc189e
+FLASK_APP=app.py
+FLASK_RUN_HOST=0.0.0.0
+HOME=/root
+```
+
+Remove the containers entirely :
+
+```
+$ docker-compose down --volumes
+Removing composetest_web_run_227460fd5720 ... done
+Removing composetest_web_1                ... done
+Removing composetest_redis_1              ... done
+Removing network composetest_default
+```
+
+​	
 
