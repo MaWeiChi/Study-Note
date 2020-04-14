@@ -1,8 +1,8 @@
  528  nginx -T -c /var/thingspro/data/nginx/nginx.conf 
-  529  vi /var/thingspro/data/nginx/locations/50-wificlient.conf 
-  530  nginx -T -c /var/thingspro/data/nginx/nginx.conf 
-  531  fg
-  532  vi /var/thingspro/data/nginx/locations/50-wificlient.conf 
+ 529  vi /var/thingspro/data/nginx/locations/50-wificlient.conf 
+ 530  nginx -T -c /var/thingspro/data/nginx/nginx.conf 
+ 531  fg
+ 532  vi /var/thingspro/data/nginx/locations/50-wificlient.conf 
   533  nginx -s reload -c /var/thingspro/data/nginx/nginx.conf 
   534  nginx -T -c /var/thingspro/data/nginx/nginx.conf 
   535  curl -H "mx-api-token:`cat /var/thingspro/data/mx-api-token`" http://127.0.0.1/api/v1/wificlient/status
