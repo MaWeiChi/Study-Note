@@ -1,0 +1,6 @@
+#!/bin/bash
+rm ./count
+for loop in $(seq 1 10); do
+    echo ${loop} >> count
+    sleep 1
+done
