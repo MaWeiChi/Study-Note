@@ -1,4 +1,10 @@
 ```bash
+[manager] manager.go:281: [Update Device DB] [{"type":"gps","mode":"auto","interface":"/dev/ttyACM0","location":{"lat":20.086791,"lng":120.434348167},"capabilities":{"interface":["/dev/ttyACM0"]}}]
+```
+
+
+
+```bash
 redis-c
 bash: redis-c: command not found
 root@Moxa:/home/moxa# redis-cli
@@ -67,11 +73,6 @@ root@Moxa:/home/moxa# redis-cli
 root@Moxa:/home/moxa# ^C
 root@Moxa:/home/moxa# redis-c^C
 root@Moxa:/home/moxa# sysman:hardware:*
-
-```
-
-```
-[manager] manager.go:281: [Update Device DB] [{"type":"gps","mode":"auto","interface":"/dev/ttyACM0","location":{"lat":20.086791,"lng":120.434348167},"capabilities":{"interface":["/dev/ttyACM0"]}}]
 
 ```
 
