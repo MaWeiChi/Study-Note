@@ -50,6 +50,47 @@
         "key": "ctrl+end",
         "command": "-cursorBottom",
         "when": "textInputFocus"
+    },
+    {
+        "key": "enter",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "alt+j",
+        "command": "cursorLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+l",
+        "command": "cursorRight",
+        "when": "textInputFocus"
+    },    {
+        "key": "alt+i",
+        "command": "cursorUp",
+        "when": "textInputFocus"
+    },    {
+        "key": "alt+k",
+        "command": "cursorDown",
+        "when": "textInputFocus"
+    },    {
+        "key": "alt+u",
+        "command": "cursorHome",
+        "when": "textInputFocus"
+    },    {
+        "key": "alt+o",
+        "command": "cursorEnd",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+d",
+        "command": "cursorWordStartLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+f",
+        "command": "cursorWordEndRight",
+        "when": "textInputFocus"
     }
 ]
 ```
