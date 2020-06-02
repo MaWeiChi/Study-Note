@@ -57,5 +57,4 @@ func main() {
 	_ = json.Unmarshal(jsonRead, &readDeviceInfo)
 	fmt.Println("under tmp dir")
 	fmt.Println(readDeviceInfo)
-
 }
