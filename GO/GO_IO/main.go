@@ -44,4 +44,10 @@ func main() {
 	_ = json.Unmarshal(jsonRead, &readDeviceInfo)
 	fmt.Println(readDeviceInfo)
 
+	// write under tmp dir
+	dir, err = ioutil.TempDir("", "second")
+	if err != nil {
+		fmt.Println(err)
+	}
+	_ = ioutil.WriteFile(dir+"/version", jsonOutPut, 0644)
 }
