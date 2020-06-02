@@ -16,7 +16,7 @@ type ModuleAndTPEVersion struct {
 
 func main() {
 	var deviceInfo ModuleAndTPEVersion
-	// read file
+	// read /pversion under /etc
 	b, _ := ioutil.ReadFile("/etc/pversion")
 	if string(b[len(b)-1:]) == "\n" {
 		b = b[:len(b)-1]
@@ -34,20 +34,28 @@ func main() {
 	}
 	fmt.Println(dir)
 
-	// write file
+	// write file under pwd dir
 	jsonOutPut, _ := json.MarshalIndent(deviceInfo, "", " ")
 	_ = ioutil.WriteFile(dir+"/version", jsonOutPut, 0644)
 
-	// read json file
+	// read json file under pwd dir
 	var readDeviceInfo ModuleAndTPEVersion
 	jsonRead, _ := ioutil.ReadFile(dir + "/version")
 	_ = json.Unmarshal(jsonRead, &readDeviceInfo)
+	fmt.Println("under pwd dir")
 	fmt.Println(readDeviceInfo)
 
-	// write under tmp dir
+	// write file under tmp dir
 	dir, err = ioutil.TempDir("", "second")
 	if err != nil {
 		fmt.Println(err)
 	}
 	_ = ioutil.WriteFile(dir+"/version", jsonOutPut, 0644)
+
+	// read json file under tmp dir
+	jsonRead, _ = ioutil.ReadFile(dir + "/version")
+	_ = json.Unmarshal(jsonRead, &readDeviceInfo)
+	fmt.Println("under tmp dir")
+	fmt.Println(readDeviceInfo)
+
 }
