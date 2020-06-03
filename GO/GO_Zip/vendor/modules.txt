@@ -1,0 +1,6 @@
+# github.com/alexmullins/zip v0.0.0-20180717182244-4affb64b04d0
+## explicit
+github.com/alexmullins/zip
+# golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37
+## explicit
+golang.org/x/crypto/pbkdf2
