@@ -1,29 +1,35 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"io"
+	"log"
+	"os"
 	"path/filepath"
+
+	"github.com/alexmullins/zip"
 )
 
 func main() {
 	// Create a zip under pwd dir
 
-	// contents := []byte("Hello World")
-	// fzip, err := os.Create(`./test.zip`)
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
-	// zipw := zip.NewWriter(fzip)
-	// defer zipw.Close()
-	// w, err := zipw.Encrypt(`test.txt`, `golang`)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// _, err = io.Copy(w, bytes.NewReader(contents))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// zipw.Flush()
+	contents := []byte(`{"model": "uc-8220-lx","tpeversion": "2.0.0-1166"}`)
+	fzip, err := os.Create(`./test.zip`)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	zipw := zip.NewWriter(fzip)
+	defer zipw.Close()
+	w, err := zipw.Encrypt(`deviceinfo`, `123`)
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = io.Copy(w, bytes.NewReader(contents))
+	if err != nil {
+		log.Fatal(err)
+	}
+	zipw.Flush()
 
 	type Folder struct {
 		Name    string

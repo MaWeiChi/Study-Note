@@ -1,0 +1,450 @@
+---
+
+test_name: Get Default Time Setting
+strict:  False
+
+includes:
+  - !include auth_stage.yaml
+
+marks:
+  - get
+  - normal
+
+
+stages:
+  - type: ref
+    id: login_get_token
+  - &test_user_login_anchor
+
+    name: get
+    request:
+      url: "{url_endpoint}/device/time"
+      method: GET
+      headers:
+        Authorization: Bear {auth_token}
+    response:
+      status_code: 200
+      json:
+        data:
+          time: !anystr
+      save:
+        json:
+          current_time: data.time
+
+---
+
+test_name: Get Default Time Setting
+
+strict:  False
+includes:
+  - !include auth_stage.yaml
+
+marks:
+  - get
+  - normal
+
+stages:
+  - type: ref
+    id: login_get_token
+  - *test_user_login_anchor
+  - name: get
+    request:
+      url: "{url_endpoint}/device/time"
+      method: GET
+      headers:
+        Authorization: Bear {auth_token}
+    response:
+      status_code: 200
+      verify_response_with:
+        - function: testing_utils:compare_date_between_get_and_current
+# ---
+
+# test_name: Patch Timezone
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - timezone
+#   - normal
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         timezone: "GMT"
+#     response:
+#       status_code: 200
+#       body:
+#         data:
+#           timezone: "GMT"
+
+# ---
+
+# test_name: Patch Timezone (invalid timezone)
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - timezone
+#   - invalid
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         timezone: "orz"
+#     response:
+#       status_code: 400
+
+# ---
+
+# test_name: Patch Timezone (empty timezone)
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - timezone
+#   - invalid
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         timezone: ""
+#     response:
+#       status_code: 400
+
+# ---
+
+# test_name: "Patch Timezone (special char '//\";)"
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - timezone
+#   - invalid
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         timezone: "'//\";"
+#     response:
+#       status_code: 400
+
+# ---
+
+# test_name: Patch NTP with timeserver (enable)
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - ntp
+#   - normal
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         ntp:
+#           enable: true
+#           source: timeserver
+#           server: tock.stdtime.gov.tw
+#           interval: 6000
+#     response:
+#       status_code: 200
+#       body:
+#         data:
+#           ntp:
+#             enable: true
+#             source: timeserver
+#             server: tock.stdtime.gov.tw
+#             interval: 6000
+
+# ---
+
+#   test_name: Patch NTP with gps (enable)
+
+#   includes:
+#     - !include auth_stage.yaml
+  
+#   marks:
+#     - patch
+#     - ntp
+#     - normal
+  
+#   stages:
+#     - type: ref
+#       id: login_get_token
+  
+#     - name: patch
+#       request:
+#         url: "{url_endpoint}/device/time"
+#         method: PATCH
+#         headers:
+#           Authorization: Bear {auth_token}
+#         json:
+#           ntp:
+#             enable: true
+#             source: gps
+#             gpslongjump: true
+#             interval: 6000
+#       response:
+#         status_code: 200
+#         body:
+#           data:
+#             ntp:
+#               enable: true
+#               source: gps
+#               gpslongjump: true
+#               interval: 6000
+  
+# ---
+
+# test_name: Patch NTP (disable)
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - ntp
+#   - normal
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         ntp:
+#           enable: false
+#     response:
+#       status_code: 200
+#       body:
+#         data:
+#           ntp:
+#             enable: false
+
+# ---
+
+#   test_name: Patch NTP with wrong source (enable)
+
+#   includes:
+#     - !include auth_stage.yaml
+  
+#   marks:
+#     - patch
+#     - ntp
+#     - normal
+  
+#   stages:
+#     - type: ref
+#       id: login_get_token
+  
+#     - name: patch
+#       request:
+#         url: "{url_endpoint}/device/time"
+#         method: PATCH
+#         headers:
+#           Authorization: Bear {auth_token}
+#         json:
+#           ntp:
+#             enable: true
+#             source: govserver
+#       response:
+#         status_code: 400
+  
+# ---
+
+ 
+#   test_name: Patch NTP with wrong timeserver (enable)
+
+#   includes:
+#     - !include auth_stage.yaml
+  
+#   marks:
+#     - patch
+#     - ntp
+#     - normal
+  
+#   stages:
+#     - type: ref
+#       id: login_get_token
+  
+#     - name: patch
+#       request:
+#         url: "{url_endpoint}/device/time"
+#         method: PATCH
+#         headers:
+#           Authorization: Bear {auth_token}
+#         json:
+#           ntp:
+#             enable: true
+#             source: timeserver
+#             server: govserver
+#             interval: 6000
+#       response:
+#         status_code: 400
+
+# ---
+
+# test_name: Patch Local Time (too long local time format)
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - localtime
+#   - invalid
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         time: "12020-01-01T00:00:00.000Z"
+#     response:
+#       status_code: 400
+
+# ---
+
+# test_name: Patch Local Time (too short local time format)
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - localtime
+#   - invalid
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         time: "12020-01-01"
+#     response:
+#       status_code: 400
+
+# ---
+
+# test_name: Teardown Local Time
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - localtime
+#   - teardown
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: patch
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: PATCH
+#       headers:
+#         Authorization: Bear {auth_token}
+#       json:
+#         $ext:
+#             function: testing_utils:json_local_time_teardown
+#     response:
+#       status_code: 200
+
+# ---
+# test_name: Teardown Local Time
+
+# includes:
+#   - !include auth_stage.yaml
+
+# marks:
+#   - patch
+#   - localtime
+#   - teardown
+
+# stages:
+#   - type: ref
+#     id: login_get_token
+
+#   - name: get
+#     request:
+#       url: "{url_endpoint}/device/time"
+#       method: GET
+#       headers:
+#         Authorization: Bear {auth_token}
+#     response:
+#       status_code: 200
+#       json: testing_utils:json_local_time_teardown
+
+
+
+
+
