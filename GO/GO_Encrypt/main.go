@@ -1,21 +1,32 @@
 package main
 
 import (
+	"archive/tar"
+	"compress/gzip"
 	"crypto/aes"
 	"crypto/cipher"
-	"crypto/md5"
 	"crypto/rand"
-	"encoding/hex"
+	"crypto/sha256"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
-func createHash(key string) string {
-	hasher := md5.New()
-	hasher.Write([]byte(key))
-	return hex.EncodeToString(hasher.Sum(nil))
+var extractDir = "."
+
+// turn password into 32 byte to use aes-256
+// func createHash(key string) string {
+// 	hasher := md5.New()
+// 	hasher.Write([]byte(key))
+// 	return hex.EncodeToString(hasher.Sum(nil))
+// }
+
+// turn password into 32 byte to use aes-256
+func createHash(key string) []byte {
+	hash := sha256.Sum256([]byte(key))
+	return hash[:]
 }
 
 func encrypt(data []byte, passphrase string) []byte {
@@ -51,7 +62,7 @@ func decrypt(data []byte, passphrase string) []byte {
 	return plaintext
 }
 
-func encryptFile(filename string, data []byte, passphrase string) {
+func encryptfile(filename string, data []byte, passphrase string) {
 	f, _ := os.Create(filename)
 	defer f.Close()
 	f.Write(encrypt(data, passphrase))
@@ -68,6 +79,49 @@ func main() {
 	fmt.Printf("Encrypted: %x\n", ciphertext)
 	plaintext := decrypt(ciphertext, "password")
 	fmt.Printf("Decrypted: %s\n", plaintext)
-	encryptFile("sample.txt", []byte("Hello World"), "password1")
-	fmt.Println(string(decryptFile("sample.txt", "password1")))
+	encryptfile("sample.txt", []byte("Hello Word"), "password1")
+	encryptFile("2020-06-05-10-28-backup.zip", "a_aes.tar.gz", "example key 1234")
+	data, _ := ioutil.ReadFile("2020-06-18-17-14-backup.tar.gz")
+	encryptfile("2020-06-18-17-14-backup.tar.gz.encryption", data, "password1")
+	data = decryptFile("sample.tar.gz", "password1")
+
+	ioutil.WriteFile(filepath.Join(extractDir, "2020-06-18-17-14-backup.tar."), data, 0755)
+
+	data, _ = ioutil.ReadFile("2020-06-18-17-14-backup.tar.gz")
+	encryptfile("2020-06-18-17-14-backup.tar.gz.encryption", data, "password1")
+
+	filename := "2020-06-19-17-42-backup.tar.gz"
+
+	br, _ := os.Open(filename)
+	gr, err := gzip.NewReader(br)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	tr := tar.NewReader(gr)
+	if len(filepath.Base(filename)) <= 7 {
+		fmt.Println(err.Error())
+	}
+	extractDir := filepath.Join(filepath.Dir(filename), filepath.Base(filename)[:len(filepath.Base(filename))-7])
+	os.RemoveAll(extractDir)
+	os.MkdirAll(extractDir, 0755)
+	for {
+		f, err := tr.Next()
+		if err == io.EOF {
+			break
+		}
+		// if f.FileInfo().IsDir() {
+		// 	continue
+		// }
+
+		os.MkdirAll(filepath.Join(extractDir, filepath.Dir(f.Name)), 0755)
+		data := make([]byte, f.Size)
+		_, err = tr.Read(data)
+		if err != nil && err != io.EOF {
+		}
+
+		ioutil.WriteFile(filepath.Join(extractDir, f.Name), data, 0755)
+
+	}
+	gr.Close()
+	fmt.Println("extractDir: " + extractDir)
 }

@@ -1,51 +1,54 @@
 package main
 
 import (
+	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
-	"fmt"
+	"crypto/rand"
+	"io"
 	"io/ioutil"
+	"os"
 )
 
-func mainlatest() {
-	// // read content from your file
-	// plaintext, err := ioutil.ReadFile("2020-06-05-10-28-backup.zip")
-	// if err != nil {
-	// 	panic(err.Error())
-	// }
+func encryptFile(fileInput, fileOutput, passphrase string) {
+	// read content from your file
+	plaintext, err := ioutil.ReadFile(fileInput)
+	if err != nil {
+		panic(err.Error())
+	}
 
-	// // this is a key
-	// key := []byte("example key 1234")
+	// this is a key
+	key := []byte(createHash(passphrase))
 
-	// block, err := aes.NewCipher(key)
-	// if err != nil {
-	// 	panic(err)
-	// }
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		panic(err)
+	}
 
-	// // The IV needs to be unique, but not secure. Therefore it's common to
-	// // include it at the beginning of the ciphertext.
-	// ciphertext := make([]byte, aes.BlockSize+len(plaintext))
-	// iv := ciphertext[:aes.BlockSize]
-	// if _, err := io.ReadFull(rand.Reader, iv); err != nil {
-	// 	panic(err)
-	// }
+	// The IV needs to be unique, but not secure. Therefore it's common to
+	// include it at the beginning of the ciphertext.
+	ciphertext := make([]byte, aes.BlockSize+len(plaintext))
+	iv := ciphertext[:aes.BlockSize]
+	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
+		panic(err)
+	}
 
-	// stream := cipher.NewCFBEncrypter(block, iv)
-	// stream.XORKeyStream(ciphertext[aes.BlockSize:], plaintext)
+	stream := cipher.NewCFBEncrypter(block, iv)
+	stream.XORKeyStream(ciphertext[aes.BlockSize:], plaintext)
 
-	// // create a new file for saving the encrypted data.
-	// f, err := os.Create("a_aes.zip")
-	// if err != nil {
-	// 	panic(err.Error())
-	// }
-	// _, err = io.Copy(f, bytes.NewReader(ciphertext))
-	// if err != nil {
-	// 	panic(err.Error())
-	// }
+	// create a new file for saving the encrypted data.
+	f, err := os.Create(fileOutput)
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = io.Copy(f, bytes.NewReader(ciphertext))
+	if err != nil {
+		panic(err.Error())
+	}
 
-	// // done
-	data, _ := ioutil.ReadFile("a_aes.zip")
-	fmt.Println(string(decrypt(data, "example key 1234")))
+	// done
+	// data, _ := ioutil.ReadFile("a_aes.zip")
+	// fmt.Println(string(decrypt(data, "example key 1234")))
 }
 
 // func decrypt() {
