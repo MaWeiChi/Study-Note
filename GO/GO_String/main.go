@@ -6,12 +6,15 @@ import (
 	"strings"
 )
 
+var modelName = "UC-8112A-LX"
+
 func main() {
 	// fmt.Println("123 \n123")
 	// fmt.Println("123 \n123")
 
 	// fmt.Println(strings.TrimSpace(" \t\n a lone gopher \n\t\r\n"))
 	fmt.Println(readPversion().Model)
+	fmt.Println(strings.Split(modelName, "-")[1])
 }
 
 func readPversion() FileVersionInfo {
