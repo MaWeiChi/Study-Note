@@ -1,0 +1,5 @@
+# github.com/CPtung/wpac-go v0.0.0-20200708013206-542b502a1b5c
+## explicit
+github.com/CPtung/wpac-go
+# github.com/godbus/dbus/v5 v5.0.3
+github.com/godbus/dbus/v5
