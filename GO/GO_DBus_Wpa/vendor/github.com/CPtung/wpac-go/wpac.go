@@ -2,6 +2,7 @@ package wpac
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/godbus/dbus/v5"
 )
@@ -46,8 +47,24 @@ func (w *WPA) InitInterface(ifname string) error {
 	if err := iface.AddEventListener(); err != nil {
 		return err
 	}
-
+	fmt.Print("iface: ")
+	fmt.Println(iface)
 	w.ifaces[ifname] = iface
+	return nil
+}
+
+func (w *WPA) GetExistInterface(ifname string) error {
+	iface := NewWPAInterface(w.ctx, w.bus)
+	ifacePath, err := iface.GetInterface(ifname)
+	if err != nil {
+		return err
+	}
+	fmt.Print("ifacePath: ")
+	fmt.Println(ifacePath)
+
+	iface.ifacePath = ifacePath
+	fmt.Print("iface: ")
+	fmt.Println(iface)
 	return nil
 }
 

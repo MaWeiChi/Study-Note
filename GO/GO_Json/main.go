@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"os"
 )
 
 type TimeEntry struct {
@@ -29,17 +31,39 @@ type NtpEntry struct {
 	Interval    int    `json:"interval" validate:"omitempty,min=60,max=2592000"`
 }
 
+type AddEntry struct {
+	Ssid     string `json:"ssid"`
+	Password string `json:"passwrod"`
+	Priority int    `json:"priority"`
+}
+
 func main() {
-	data := `{"type": "time", "timezone": "Asia/Taipei", "ntp": {"enable": true, "source": "timeserver", "server": "pool.ntp.or", "gpsLongJump": true, "interval": 60}}`
-	var time TimeEntry
-	if err := json.Unmarshal([]byte(data), &time); err != nil {
+
+	file, err := os.Open("/home/moxa/Study-Note/GO/GO_Json/config")
+	if err != nil {
+		panic(err)
+	}
+	bytes, err := ioutil.ReadAll(file)
+	if err != nil {
+		panic(err)
+	}
+	var Addlist []AddEntry
+	if err := json.Unmarshal(bytes, &Addlist); err != nil {
 		fmt.Println(err.Error())
 	}
-	fmt.Println(time)
-	fmt.Println(time.Ntp)
-	var ntp NtpEntry
-	if err := json.Unmarshal([]byte(data), &ntp); err != nil {
-		fmt.Println(err.Error())
-	}
-	fmt.Println(ntp)
+	fmt.Println(Addlist)
+	fmt.Println(Addlist[0].Ssid)
+
+	// data := `{"type": "time", "timezone": "Asia/Taipei", "ntp": {"enable": true, "source": "timeserver", "server": "pool.ntp.or", "gpsLongJump": true, "interval": 60}}`
+	// var time TimeEntry
+	// if err := json.Unmarshal([]byte(data), &time); err != nil {
+	// 	fmt.Println(err.Error())
+	// }
+	// fmt.Println(time)
+	// fmt.Println(time.Ntp)
+	// var ntp NtpEntry
+	// if err := json.Unmarshal([]byte(data), &ntp); err != nil {
+	// 	fmt.Println(err.Error())
+	// }
+	// fmt.Println(ntp)
 }

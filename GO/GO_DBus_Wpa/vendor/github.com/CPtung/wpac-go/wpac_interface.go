@@ -183,14 +183,14 @@ func (self *WPAInterface) AutoScan() ([]WPABSS, error) {
 }
 
 func (self *WPAInterface) AddNetwork(args map[string]dbus.Variant) (*WPANetwork, error) {
-	if _, ok := args["bssid"]; ok {
-		bssid := args["bssid"].Value().(string)
-		for _, network := range self.networks {
-			if network.BSSID == bssid {
-				return &network, nil
-			}
-		}
-	}
+	// if _, ok := args["bssid"]; ok {
+	// 	bssid := args["bssid"].Value().(string)
+	// 	for _, network := range self.networks {
+	// 		if network.BSSID == bssid {
+	// 			return &network, nil
+	// 		}
+	// 	}
+	// }
 
 	obj := self.bus.Connection.Object("fi.w1.wpa_supplicant1", self.ifacePath)
 	call := obj.Call("fi.w1.wpa_supplicant1.Interface.AddNetwork", 0, args)

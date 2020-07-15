@@ -24,6 +24,7 @@ func (config *WPASupplicantConfig) GetWPA(bss WPABSS) map[string]dbus.Variant {
 	template["pairwise"] = dbus.MakeVariant("TKIP")
 	template["group"] = dbus.MakeVariant("TKIP")
 	template["key_mgmt"] = dbus.MakeVariant("WPA-PSK")
+	template["priority"] = dbus.MakeVariant(bss.Priority)
 	return template
 }
 
@@ -36,6 +37,7 @@ func (config *WPASupplicantConfig) GetWPA2(bss WPABSS) map[string]dbus.Variant {
 	template["pairwise"] = dbus.MakeVariant("CCMP")
 	template["group"] = dbus.MakeVariant("CCMP")
 	template["key_mgmt"] = dbus.MakeVariant("WPA-PSK")
+	template["priority"] = dbus.MakeVariant(bss.Priority)
 	return template
 }
 
@@ -43,6 +45,7 @@ func (config *WPASupplicantConfig) GetWPANone(bss WPABSS) map[string]dbus.Varian
 	template := make(map[string]dbus.Variant)
 	template["ssid"] = dbus.MakeVariant(bss.SSID)
 	template["key_mgmt"] = dbus.MakeVariant("NONE")
+	template["priority"] = dbus.MakeVariant(bss.Priority)
 	return template
 }
 
@@ -55,5 +58,6 @@ func (config *WPASupplicantConfig) GetWPAWPA2(bss WPABSS) map[string]dbus.Varian
 	template["pairwise"] = dbus.MakeVariant("CCMP")
 	template["group"] = dbus.MakeVariant("CCMP")
 	template["key_mgmt"] = dbus.MakeVariant("WPA-PSK")
+	template["priority"] = dbus.MakeVariant(bss.Priority)
 	return template
 }
