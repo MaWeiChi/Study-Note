@@ -83,7 +83,7 @@ type SecurityEntry struct {
 	Mode       string `json:"mode" validate:"omitempty,eq=wpa2"`      // only wpa2 now
 	Encryption string `json:"encryption" validate:"omitempty,eq=aes"` // only aes now
 	Password   string `json:"password,omitempty" validate:"omitempty,min=8,max=63,printascii"`
-	Support    bool   `json:"support,omitempty"`
+	Support    *bool  `json:"support,omitempty"`
 }
 
 func state() {
@@ -125,23 +125,45 @@ func scan() {
 	fmt.Println(string(j))
 }
 
+// func assignWpaStruct(s *SecurityEntry, w1 *wpac.BSSWPA, w2 *wpac.BSSWPA2) {
+// 	if w2 != nil {
+// 		s.Mode = convertTerms(strings.Split(w2.KeyMgmt[0], "-")[1], "wpa2", 0)
+// 		s.Encryption = convertTerms(w2.Group, "", 0)
+// 		if s.Mode == "wpa2-personal" {
+// 			s.Support = true
+// 		}
+// 	} else if w1 != nil {
+// 		s.Mode = convertTerms(strings.Split(w1.KeyMgmt[0], "-")[1], "wpa", 0)
+// 		s.Encryption = convertTerms(w1.Group, "", 0)
+// 		s.Support = false
+// 	} else {
+// 		s.Mode = "none"
+// 		s.Encryption = "none"
+// 		s.Support = true
+// 	}
+// }
+
 func assignWpaStruct(s *SecurityEntry, w1 *wpac.BSSWPA, w2 *wpac.BSSWPA2) {
+	s.Support = new(bool)
 	if w2 != nil {
 		s.Mode = convertTerms(strings.Split(w2.KeyMgmt[0], "-")[1], "wpa2", 0)
 		s.Encryption = convertTerms(w2.Group, "", 0)
 		if s.Mode == "wpa2-personal" {
-			s.Support = true
+			*s.Support = true
+		} else {
+			*s.Support = false
 		}
 	} else if w1 != nil {
 		s.Mode = convertTerms(strings.Split(w1.KeyMgmt[0], "-")[1], "wpa", 0)
 		s.Encryption = convertTerms(w1.Group, "", 0)
-		s.Support = false
+		*s.Support = false
 	} else {
 		s.Mode = "none"
 		s.Encryption = "none"
-		s.Support = true
+		*s.Support = true
 	}
 }
+
 func convertTerms(s, t string, i uint16) string {
 	if s == "psk" {
 		return t + "-personal"
@@ -225,7 +247,7 @@ func loadConfig(path string, bss *wpa.WPABSS) error {
 }
 
 func loadConfig2() ([]byte, error) {
-	file, err := os.Open("/home/moxa/Study-Note/GO/GO_DBus_Wpa/1.config")
+	file, err := os.Open("/home/erik/Study-Note/GO/GO_DBus_Wpa/1.config")
 	if err != nil {
 		return nil, err
 	}
@@ -236,7 +258,7 @@ func loadConfig2() ([]byte, error) {
 	return bytes, nil
 }
 
-func addNetwork(ssid, psk string, priority int) {
+func addNetwork(bssid, ssid, psk string, priority int) {
 	var (
 		config map[string]dbus.Variant
 	)
@@ -245,6 +267,9 @@ func addNetwork(ssid, psk string, priority int) {
 		SSID:     ssid,
 		PSK:      psk,
 		Priority: priority,
+	}
+	if bssid != "" {
+		bss.BSSID = bssid
 	}
 	security = "wpa2"
 	switch security {
@@ -335,15 +360,15 @@ func setPriority(priorities []string) {
 
 func main() {
 	var err error
-	var WifiInterface []WifiEntry
+	// var WifiInterface []WifiEntry
 
-	data, err := loadConfig2()
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	if err := json.Unmarshal(data, &WifiInterface); err != nil {
-		fmt.Println(err.Error())
-	}
+	// data, err := loadConfig2()
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// }
+	// if err := json.Unmarshal(data, &WifiInterface); err != nil {
+	// 	fmt.Println(err.Error())
+	// }
 
 	if wpacli, err = wpa.NewWPA(context.TODO()); err != nil {
 		log.Fatalf(err.Error())
@@ -357,28 +382,48 @@ func main() {
 		fmt.Println("InitInterface successfully")
 	}
 
-	// if err := wpacli.GetExistInterface(ifname); err != nil {
-	// 	log.Fatalf(err.Error())
-	// } else {
+	// // if err := wpacli.GetExistInterface(ifname); err != nil {
+	// // 	log.Fatalf(err.Error())
+	// // } else {
 
-	// 	fmt.Println("GetInterface successfully")
-	// }
-	removeNetwork()
-	fmt.Println(len(WifiInterface[0].Client.Priorities))
-	setPriority(WifiInterface[0].Client.Priorities)
+	// // 	fmt.Println("GetInterface successfully")
+	// // }
+	// removeNetwork()
+	// fmt.Println(len(WifiInterface[0].Client.Priorities))
+	// setPriority(WifiInterface[0].Client.Priorities)
 
-	// for _, network := range WifiInterface[0].Client.Networks {
-	// 	addNetwork(network.Ssid, network.Security.Password, priorityArray[network.Uuid])
-	// }
-	addNetwork("Zenfone6", "12345678", 6)
-	wpacli.GetInterface(ifname).SelectNetwork(0)
-	addNetwork("RT-AC56UM", "!2345678", 1)
-	addNetwork("RT-AC56UM-5G", "!2345678", 2)
+	// // for _, network := range WifiInterface[0].Client.Networks {
+	// // 	addNetwork(network.Ssid, network.Security.Password, priorityArray[network.Uuid])
+	// // }
+	// addNetwork("", "Zenfone6", "12345678", 6)
+	// wpacli.GetInterface(ifname).SelectNetwork(0)
+	// addNetwork("Eric", "24690885", 1)
+	// addNetwork("Eric_5G", "24690885", 2)
 
-	// wpacli.GetInterface(ifname).SetNetworkEnabled(3, true)
-	// cfile = "/home/moxa/Study-Note/GO/GO_DBus_Wpa/wifi.conf"
-	// scan()
-	// connect()
-	// time.Sleep(5 * time.Second)
-	state()
+	// // wpacli.GetInterface(ifname).SetNetworkEnabled(3, true)
+	// // cfile = "/home/moxa/Study-Note/GO/GO_DBus_Wpa/wifi.conf"
+	scan()
+	// // connect()
+	// // time.Sleep(5 * time.Second)
+	// state()
+
+	var a []ApServerEntry
+	var b []ApServerEntry
+	fmt.Println(NetworksEqual(a, b))
+
+}
+
+func NetworksEqual(a, b []ApServerEntry) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, v := range a {
+		if v.Uuid != b[i].Uuid {
+			return false
+		}
+		if v.Security.Password != b[i].Security.Password {
+			return false
+		}
+	}
+	return true
 }
