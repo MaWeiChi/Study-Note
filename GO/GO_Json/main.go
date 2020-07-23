@@ -53,7 +53,7 @@ func main() {
 	}
 	fmt.Println(Addlist)
 	fmt.Println(Addlist[0].Ssid)
-
+	fmt.Println(json.Marshal(Addlist))
 	// data := `{"type": "time", "timezone": "Asia/Taipei", "ntp": {"enable": true, "source": "timeserver", "server": "pool.ntp.or", "gpsLongJump": true, "interval": 60}}`
 	// var time TimeEntry
 	// if err := json.Unmarshal([]byte(data), &time); err != nil {

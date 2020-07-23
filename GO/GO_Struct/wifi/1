@@ -1,0 +1,54 @@
+ 
+    {
+      "type": "wifi",
+      "id": 1,
+      "name": "wlan0",
+      "available": true,
+      "mode": "client",
+      "enable": true,
+      "status": true,
+      "capabilities": {
+        "mode": [
+          "ap",
+          "client"
+        ],
+        "band": [
+          "band24",
+          "band50"
+        ]
+      },
+      "client": {
+        "connecteState": "connected",
+        "currentAP": "34631c38-c4b8-11ea-87d0-0242ac130003",
+        "priorities": [
+          "34631c38-c4b8-11ea-87d0-0242ac130003","34631e54-c4b8-11ea-87d0-0242ac130003"
+        ],
+        "networks": [
+          {
+            "uuid": "34631c38-c4b8-11ea-87d0-0242ac130003",
+            "ssid": "moxa-test-ap-1",
+            "bssid": "10:c3:7b:c6:47:f8",
+            "security": {
+              "mode": "wpa2-personal",
+              "encryption": "aes",
+              "password": "!2345678"
+            },
+            "signal": -17,
+            "band": "band50"
+          },
+          {
+            "uuid": "34631e54-c4b8-11ea-87d0-0242ac130003",
+            "ssid": "moxa-ap-2",
+            "bssid": "",
+            "security": {
+              "mode": "wpa2-personal",
+              "encryption": "aes",
+              "password": "!2345678"
+            },
+            "signal": null,
+            "band": "band24"
+          }
+        ]
+      }
+    }
+  

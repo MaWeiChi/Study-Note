@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"strconv"
 	"strings"
 )
 
@@ -13,8 +14,13 @@ func main() {
 	// fmt.Println("123 \n123")
 
 	// fmt.Println(strings.TrimSpace(" \t\n a lone gopher \n\t\r\n"))
-	fmt.Println(readPversion().Model)
-	fmt.Println(strings.Split(modelName, "-")[1])
+	// fmt.Println(readPversion().Model)
+	// fmt.Println(strings.Split(modelName, "-")[1])
+	t := 12345678
+	s2 := strconv.Itoa(t)
+	fmt.Println(t)
+	// fmt.Println(string([]byte)
+	fmt.Println(s2 + "sd")
 }
 
 func readPversion() FileVersionInfo {

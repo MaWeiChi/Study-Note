@@ -1,0 +1,85 @@
+{
+  "wifis": [
+    {
+      "type": "wifi",
+      "name": "wlan0",
+      "available": true,
+      "status": true,
+      "capabilities": {
+        "mode": [
+          "ap",
+          "client"
+        ],
+        "band": [
+          "band24",
+          "band50"
+        ]
+      },
+      "regions": null,
+      "id": 1,
+      "enable": true,
+      "mode": "client",
+      "ap": {
+        "band": "",
+        "broadcastSsid": false,
+        "ssid": "",
+        "channel": 0,
+        "region": "",
+        "security": {
+          "mode": "",
+          "encryption": "",
+          "password": ""
+        },
+        "clients": null
+      },
+      "client": {
+        "connectState": "connected",
+        "currentAp": "34631c38-c4b8-11ea-87d0-0242ac130003",
+        "priority": [
+          "34631c38-c4b8-11ea-87d0-0242ac130003",
+          "34631e54-c4b8-11ea-87d0-0242ac130003"
+        ],
+        "networks": [
+          {
+            "uuid": "34631c38-c4b8-11ea-87d0-0242ac130003",
+            "ssid": "moxa-test-ap-1",
+            "bssid": "10:c3:7b:c6:47:f8",
+            "security": {
+              "mode": "wpa2-personal",
+              "encryption": "aes",
+              "password": "!2345678"
+            },
+            "signal": -17,
+            "band": "band50"
+          },
+          {
+            "uuid": "34631e54-c4b8-11ea-87d0-0242ac130003",
+            "ssid": "moxa-ap-2",
+            "bssid": "",
+            "security": {
+              "mode": "wpa2-personal",
+              "encryption": "aes",
+              "password": "!2345678"
+            },
+            "signal": 0,
+            "band": "band24"
+          }
+        ]
+      }
+    }
+  ],
+  "layer3Set": {
+    "1": {
+      "ipsetting": {
+        "enableDhcp": false,
+        "ip": "192.168.3.100",
+        "netmask": "255.255.252.0"
+      },
+      "checkalive": {
+        "intervalSec": 60,
+        "enable": true,
+        "targetHost": "8.8.8.8"
+      }
+    }
+  }
+}

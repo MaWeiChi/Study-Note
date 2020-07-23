@@ -2,7 +2,7 @@
 
 ```bash
 appman app stop device
-docker cp /tmp/deviced device_app_1:/var/tpdevice/
+docker cp deviced device_app_1:/var/tpdevice/
 appman app start device
 journalctl APPNAME=device -f
 ```
