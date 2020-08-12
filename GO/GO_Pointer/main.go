@@ -2,15 +2,61 @@ package main
 
 import "fmt"
 
-func main() {
-	var s string
-	s = "complete"
-	ConnectedConfirm(&s)
-	fmt.Println(s)
+//-----------------------------------------------------
+// func main() {
+// 	var s string
+// 	s = "complete"
+// 	ConnectedConfirm(&s)
+// 	fmt.Println(s)
+// }
+
+// func ConnectedConfirm(status *string) {
+// 	if *status == "complete" {
+// 		*status = "connected"
+// 	}
+// }
+//-----------------------------------------------------
+
+type foo struct {
+	id   int
+	name string
 }
 
-func ConnectedConfirm(status *string) {
-	if *status == "complete" {
-		*status = "connected"
-	}
+type bigFoo struct {
+	Foo foo
+}
+type bigStarFoo struct {
+	Foo *foo
+}
+
+func main() {
+	var f1 bigStarFoo
+	fmt.Println(f1)
+	f1.Foo = &foo{}
+	fmt.Println(f1)
+	fmt.Printf("f1.Foo's id: %d, name: %s \n", f1.Foo.id, f1.Foo.name)
+	f1.Foo.id = 1
+	f1.Foo.name = "f1"
+	fmt.Println(f1)
+	fmt.Println(f1.Foo)
+	fmt.Println(*f1.Foo)
+	fmt.Println(&f1.Foo)
+	fmt.Printf("f1.Foo's id: %d, name: %s \n", f1.Foo.id, f1.Foo.name)
+
+	// pointer asign to object
+	var f2 bigFoo
+	fmt.Print("f2: ")
+	fmt.Println(f2)
+	f2.Foo = *f1.Foo
+	fmt.Print("f2: ")
+	fmt.Println(f2)
+
+	// object asign to pointer
+	var f3 bigStarFoo
+	fmt.Print("f3: ")
+	fmt.Println(f3)
+	f3.Foo = &f2.Foo
+	fmt.Print("f3: ")
+	fmt.Println(f3)
+	fmt.Printf("f3.Foo's id: %d, name: %s \n", f3.Foo.id, f3.Foo.name)
 }

@@ -41,13 +41,12 @@ func main() {
 	Ap2.Security.Encryption = "aes"
 	Ap2.Security.Password = "!2345678"
 	Ap2.Band = "Band24"
-
+	// wifiEntryWithNetworkLayer.Enable = new(bool)
 	wifiEntryWithNetworkLayer.Type = "wifi"
 	wifiEntryWithNetworkLayer.Id = 1
 	wifiEntryWithNetworkLayer.Name = "wlan0"
 	wifiEntryWithNetworkLayer.Available = true
 	wifiEntryWithNetworkLayer.Mode = "client"
-	wifiEntryWithNetworkLayer.Enable = true
 	wifiEntryWithNetworkLayer.Status = true
 	wifiEntryWithNetworkLayer.Capabilities.Mode = []string{"ap", "client"}
 	wifiEntryWithNetworkLayer.Capabilities.Band = []string{"Band24", "Band50"}
@@ -102,7 +101,6 @@ func GetMockData(c *gin.Context) {
 	wifiEntryWithNetworkLayer.Name = "wlan0"
 	wifiEntryWithNetworkLayer.Available = true
 	wifiEntryWithNetworkLayer.Mode = "client"
-	wifiEntryWithNetworkLayer.Enable = true
 	wifiEntryWithNetworkLayer.Status = true
 	wifiEntryWithNetworkLayer.Capabilities.Mode = []string{"ap", "client"}
 	wifiEntryWithNetworkLayer.Capabilities.Band = []string{"Band24", "Band50"}
@@ -145,7 +143,7 @@ type WifiReadOnlyEntry struct {
 
 type WifiReadWriteEntryWithNetworkLayer struct {
 	Id     int                             `json:"id,omitempty" validate:"omitempty,min=1"`
-	Enable bool                            `json:"enable"`
+	Enable *bool                           `json:"enable,omitempty"`
 	Mode   string                          `json:"mode,omitempty" validate:"omitempty,oneof=ap client"`
 	Ap     ApEntry                         `json:"ap,omitempty"`
 	Client WifiClientEntryWithNetworkLayer `json:"client,omitempty"`
