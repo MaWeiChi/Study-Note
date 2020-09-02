@@ -29,6 +29,10 @@ type bigStarFoo struct {
 	Foo *foo
 }
 
+type too struct {
+	id *int
+}
+
 func main() {
 	var f1 bigStarFoo
 	fmt.Println(f1)
@@ -59,4 +63,9 @@ func main() {
 	fmt.Print("f3: ")
 	fmt.Println(f3)
 	fmt.Printf("f3.Foo's id: %d, name: %s \n", f3.Foo.id, f3.Foo.name)
+
+	var Too too
+	id := 1
+	Too.id = &id
+	fmt.Println(*Too.id)
 }
