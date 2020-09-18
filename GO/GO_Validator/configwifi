@@ -1,0 +1,561 @@
+{
+    "type": "wifi",
+    "name": "wlan0",
+    "displayName": "Wi-Fi1",
+    "available": true,
+    "status": true,
+    "capabilities": {
+        "mode": [
+        "ap",
+        "client"
+        ],
+        "band": [
+        "band24",
+        "band50"
+        ]
+    },
+    "regions": [
+        {
+        "name": "Australia",
+        "countryCode": "AU",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Bahrain",
+        "countryCode": "BH",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Brazil",
+        "countryCode": "BR",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Switzerland",
+        "countryCode": "CH",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48
+        ]
+        },
+        {
+        "name": "China",
+        "countryCode": "CN",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Europe",
+        "countryCode": "GB",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48
+        ]
+        },
+        {
+        "name": "Israel",
+        "countryCode": "IL",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48
+        ]
+        },
+        {
+        "name": "India",
+        "countryCode": "IN",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Japan",
+        "countryCode": "JP",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48
+        ]
+        },
+        {
+        "name": "Korea",
+        "countryCode": "KR",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "New Zealand",
+        "countryCode": "NZ",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Russia",
+        "countryCode": "RU",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Singapore",
+        "countryCode": "SG",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "Turkey",
+        "countryCode": "TR",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48
+        ]
+        },
+        {
+        "name": "Taiwan",
+        "countryCode": "TW",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "North America",
+        "countryCode": "US",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            149,
+            153,
+            157,
+            161,
+            165
+        ]
+        },
+        {
+        "name": "South Africa",
+        "countryCode": "ZA",
+        "band24": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+        ],
+        "band50": [
+            36,
+            40,
+            44,
+            48,
+            100,
+            104,
+            108,
+            112,
+            116,
+            120,
+            124,
+            128,
+            132,
+            136,
+            140
+        ]
+        }
+    ],
+    "id": 1,
+    "enable": true,
+    "mode": "client",
+    "ap": {
+        "band": "band50",
+        "broadcastSsid": false,
+        "ssid": "moxa-42",
+        "channel": 36,
+        "region": "ZA",
+        "security": {
+        "mode": "wpa2",
+        "encryption": "aes",
+        "password": "admin@12322222"
+        },
+        "clients": []
+    },
+    "client": {
+        "connectState": "disconnect",
+        "currentAp": "bFoyUTiRR",
+        "priority": [
+        "bFoyUTiRR",
+        "30TsUomgR"
+        ],
+        "networks": [
+        {
+            "uuid": "bFoyUTiRR",
+            "ssid": "RT-AC56UM-5G",
+            "bssid": "",
+            "security": {
+            "mode": "wpa2-personal",
+            "encryption": "aes",
+            "password": "!2345678",
+            "support": true
+            },
+            "signal": null,
+            "band": ""
+        },
+        {
+            "uuid": "30TsUomgR",
+            "ssid": "ASUS",
+            "bssid": "",
+            "security": {
+            "mode": "none",
+            "encryption": "none",
+            "password": "",
+            "support": true
+            },
+            "signal": null,
+            "band": ""
+        }
+        ]
+    }
+}

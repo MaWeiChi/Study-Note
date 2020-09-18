@@ -1,0 +1,18 @@
+{
+    "type": "wifi",
+    "networks":[
+            {
+                "ssid":"RT-AC56UM-5G",
+                "password":"!2345678",
+                "priority":1
+            },{
+                "ssid":"RT-AC56UM-2.4G",
+                "password":"12345678",
+                "priority":2
+            },{
+                "ssid":"Zenfone6",
+                "password":"12345678",
+                "priority":3
+            }
+        ]
+}

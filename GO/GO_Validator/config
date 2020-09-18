@@ -1,0 +1,5 @@
+{
+    "mode":"wpa21",
+    "encryption":"aes",
+    "password":"12345678"
+}
