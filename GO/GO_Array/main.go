@@ -18,6 +18,10 @@ func main() {
 		SliceIndex(len(xs), func(i int) bool { return xs[i] == 6 }),
 		SliceIndex(len(ys), func(i int) bool { return ys[i] == "Z" }),
 		SliceIndex(len(ys), func(i int) bool { return ys[i] == "A" }))
+	xs2 := []int{2, 4, 6, 8}
+	xs = append(xs, xs2...)
+
+	fmt.Println(xs)
 }
 
 func SliceIndex(limit int, predicate func(i int) bool) int {
