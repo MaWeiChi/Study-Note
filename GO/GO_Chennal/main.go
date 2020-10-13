@@ -26,6 +26,9 @@ func funcWithNonChanResult() int {
 }
 
 func main() {
-	fmt.Println("Received first int:", <-funcWithChanResult())
-	fmt.Println("Received second int:", funcWithNonChanResult())
+	// fmt.Println("Received first int:", <-funcWithChanResult())
+	// fmt.Println("Received second int:", funcWithNonChanResult())
+	<-time.After(time.Duration(10) * time.Second)
+	time.Sleep(time.Duration(10) * time.Second)
+	fmt.Print(1)
 }
