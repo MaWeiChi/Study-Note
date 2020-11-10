@@ -1,0 +1,4 @@
+```
+udevadm monitor --env
+```
+
