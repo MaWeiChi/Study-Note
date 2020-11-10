@@ -1,0 +1,8 @@
+{
+    "name": "wlan0",
+    "checkalive": {
+        "intervalSec": 60,
+        "enable": true,
+        "targetHost": "8.8.8.8"
+    }
+}
