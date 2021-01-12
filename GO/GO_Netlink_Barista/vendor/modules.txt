@@ -1,0 +1,13 @@
+# barista.run v0.0.0-20201208155546-59de488d242f
+## explicit
+barista.run/base/notifier
+barista.run/base/value
+barista.run/base/watchers/netlink
+barista.run/logging
+# github.com/vishvananda/netlink v1.1.0
+github.com/vishvananda/netlink/nl
+# github.com/vishvananda/netns v0.0.0-20191106174202-0a2b9b5464df
+github.com/vishvananda/netns
+# golang.org/x/sys v0.0.0-20201201145000-ef89a241ccb3
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/unix

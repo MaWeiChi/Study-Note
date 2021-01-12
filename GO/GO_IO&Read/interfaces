@@ -1,0 +1,48 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto enp1s0
+iface enp1s0 inet static
+        address 192.168.3.127
+        network 192.168.3.0
+        netmask 255.255.255.0
+        broadcast 192.168.3.255
+
+# The secondary network interface
+auto enp2s0
+iface enp2s0 inet static
+        address 192.168.4.127
+        network 192.168.4.0
+        netmask 255.255.255.0
+        broadcast 192.168.4.255
+
+auto enp6s0
+iface enp6s0 inet static
+        address 192.168.5.127
+        network 192.168.5.0
+        netmask 255.255.255.0
+        broadcast 192.168.5.255
+
+auto enp7s0
+iface enp7s0 inet static
+        address 192.168.6.127
+        network 192.168.6.0
+        netmask 255.255.255.0
+        broadcast 192.168.6.255
+
+iface lo inet loopback
+iface eth0 inet static
+        address 192.168.3.127
+        network 192.168.3.0
+        netmask 255.255.255.0
+        broadcast 192.168.3.255
+iface eth1 inet static
+        address 192.168.4.127
+        network 192.168.4.0
+        netmask 255.255.255.0
+        broadcast 192.168.4.255
