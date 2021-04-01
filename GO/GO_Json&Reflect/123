@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+    <Product Id='*' Name='dlm-agent' Language='1033' Version='0.0.6' Manufacturer='Moxa' UpgradeCode='{DD0B0A22-15B0-4F12-B3B2-23A818D92945}' Codepage='1252'>
+        <Package AdminImage='no' Compressed='yes' Description='dlm-agent' InstallerVersion='300' InstallScope='perMachine' Languages='1033' Manufacturer='Moxa' Platform='x64' ReadOnly='no' ShortNames='no' />
+        <Media Id='1' Cabinet='product.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1' />
+        <Property Id='DiskPrompt' Value='dlm-agent Installation [1]' />
+        <Property Id='ARPCONTACT' Value='Moxa' />
+        <!-- The '.NET Framework' launch condition. -->
+        <!--<PropertyRef Id='NETFRAMEWORK20' />-->
+        <!--<Condition Message='This setup requires the .NET Framework version vANY.  Please install the .NET Framework and run this setup again.'><![CDATA[Installed OR NETFRAMEWORK20]]></Condition>-->
+        <CustomAction Id='PreventDowngrading' Error='Newer version already installed.' />
+        <!-- The 'dlm-agent.exe' custom action. -->
+        <CustomAction Id='_797C52AB_8A3C_4819_8FBC_18EFA61593E0' FileKey='_5C2D4239_286C_964F_8058_16483DF4D055' Execute='deferred' ExeCommand='install' Impersonate='no' />
+        <!-- The 'InstallOpenSSH.vbs' custom action. -->
+        <CustomAction Id='_D93CE9E2_6557_49F7_9966_A514A3D54C43' FileKey='_BB3DC300_A168_AD4D_9E50_FDAF234DF799' Execute='deferred' VBScriptCall='' Impersonate='no' />
+        <!-- The 'deleteKey.vbs' custom action. -->
+        <CustomAction Id='_0421B0C7_B7CD_4E3A_AE95_DC02D96AB1D7' FileKey='_9B31D54F_F80E_8942_9396_A306D068C18D' Execute='deferred' VBScriptCall='' Impersonate='no' />
+        <!-- The 'dlm-agent.exe' custom action. -->
+        <CustomAction Id='_CBDEE2BF_6EA6_4264_8929_0E6E6E311A33' FileKey='_5C2D4239_286C_964F_8058_16483DF4D055' Execute='deferred' ExeCommand='uninstall' Impersonate='no' />
+        <!-- The directory tree of the installation package. -->
+        <Directory Id='TARGETDIR' Name='SourceDir'>
+            <Directory Id='ProgramFiles64Folder' Name='PFiles'>
+              <Directory Id='ProgramFilesFolderCompany' Name='Moxa'>
+                <Directory Id='INSTALLDIR' Name='dlm-agent'>
+                  <Directory Id='_AD50BB23_AB34_5E45_BD2B_BAF9E62AB5AF' Name='messages'>
+                    <Component Id='com_B7F02CB9_6CA9_DF4F_BA04_7124130CACA5' Guid='9A4CD46E-63E8-4836-B644-EB36BAA3887E' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                      <File Id='_B7F02CB9_6CA9_DF4F_BA04_7124130CACA5' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='dlm-1.json' Source='register\messages\dlm-1.json' KeyPath='yes' />
+                    </Component>
+                  </Directory>
+                  <Directory Id='_E14D550F_7A3A_2546_8185_8D879466298F' Name='twin'>
+                    <Component Id='com_17C3A4D3_590D_2547_BF06_3BB13F8B2948' Guid='A669381F-750C-4D33-BAE6-1C9F90AB1033' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                      <File Id='_17C3A4D3_590D_2547_BF06_3BB13F8B2948' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='dlm-1.json' Source='register	win\dlm-1.json' KeyPath='yes' />
+                    </Component>
+                  </Directory>
+                  <Directory Id='_6C4B2024_F30C_A74A_ADC3_C5D3AC90B38E' Name='install'>
+                    <Component Id='com_9B31D54F_F80E_8942_9396_A306D068C18D' Guid='1AD90DCC-FD84-4BD0-9BED-FFACCE1AF8DF' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                      <File Id='_9B31D54F_F80E_8942_9396_A306D068C18D' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='deleteKey.vbs' Source='DeviceUpgrade\install\deleteKey.vbs' KeyPath='yes' />
+                    </Component>
+                    <Component Id='com_BB3DC300_A168_AD4D_9E50_FDAF234DF799' Guid='93DD9E56-C0F2-4CEA-8AF1-2528A83E45A1' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                      <File Id='_BB3DC300_A168_AD4D_9E50_FDAF234DF799' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='InstallOpenSSH.vbs' Source='InstallAction\InstallOpenSSH.vbs' KeyPath='yes' />
+                    </Component>
+                    <Component Id='com_E19703A8_FC1E_7545_A975_B6C1339E4AB1' Guid='9DF1436B-7F1A-419B-82DD-60FA6009F78F' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                      <File Id='_E19703A8_FC1E_7545_A975_B6C1339E4AB1' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='MoxaSoftwareDeploymentKeys.xml' Source='DeviceUpgrade\install\MoxaSoftwareDeploymentKeys.xml' KeyPath='yes' />
+                    </Component>
+                  </Directory>
+                  <Directory Id='_5D05FC66_A468_5F44_BAE3_F442B4B823F6' Name='dlm'>
+                    <Component Id='com_BBD489BE_70E2_CA43_AE46_A83D06317AD3' Guid='7186381D-AD8D-4088-90B4-81229DBA883A' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                      <File Id='_BBD489BE_70E2_CA43_AE46_A83D06317AD3' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='dlm.json' Source='register\dlm\dlm.json' KeyPath='yes' />
+                    </Component>
+                  </Directory>
+                  <Component Id='com_2088A6C1_2CF0_7D47_B3E6_D8211D067667' Guid='3713225E-3FCF-4B33-A7D8-51111AE86652' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                    <File Id='_2088A6C1_2CF0_7D47_B3E6_D8211D067667' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='Newtonsoft.Json.dll' Source='DeviceUpgrade\Newtonsoft.Json.dll' KeyPath='yes' />
+                  </Component>
+                  <Component Id='com_2A70FD6D_00CD_BF46_A065_50D879E0213C' Guid='7FD25491-0AC8-42E3-BCF7-2F14C29969FA' Permanent='no' SharedDllRefCount='no' Transitive='no'>
+                    <File Id='_2A70FD6D_00CD_BF46_A065_50D879E0213C' DiskId='1' Hidden='no' ReadOnly='no' System='no' Vital='yes' Compressed='yes' Name='configuration.json' Source='register

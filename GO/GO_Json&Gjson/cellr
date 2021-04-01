@@ -1,0 +1,99 @@
+{
+  "count": 1,
+  "data": [
+    {
+      "available": true,
+      "status": "connected",
+      "currentProfileId": 1,
+      "operatorName": "Chunghwa Telecom",
+      "ip": "111.70.4.188",
+      "netmask": "255.255.255.255",
+      "gateway": "111.70.4.67",
+      "dns": [
+        "168.95.1.1",
+        "168.95.192.1"
+      ],
+      "name": "usb0",
+      "module": "u-blox TOBY-L2 series",
+      "imei": "352255062111061",
+      "tac": "2BC0",
+      "cellId": "03452A21",
+      "iccId": "89886920042534393827",
+      "imsi": "466924253439382",
+      "pinRetryRemain": 3,
+      "mac": "02:01:05:19:00:0b",
+      "rat": "lte",
+      "signal": {
+        "rat": "lte",
+        "csq": 24,
+        "rssi": -63.5,
+        "rxqual": 0,
+        "rscp": 0,
+        "ecio": 0,
+        "rsrp": -95,
+        "rsrq": -10,
+        "indicator": "RSRP",
+        "level": 4
+      },
+      "type": "cellulars",
+      "wan": true,
+      "displayName": "Cellular1",
+      "capabilities": {
+        "sim": 2
+      },
+      "id": 1,
+      "profileTimeout": 120,
+      "enable": true,
+      "keepalive": {
+        "intervalSec": 60,
+        "enable": true,
+        "targetHost": "8.8.8.8",
+        "reboot": {
+          "enable": false,
+          "intervalMin": 20
+        }
+      },
+      "autoDetect": false,
+      "profiles": [
+        {
+          "id": 1,
+          "name": "SIM1",
+          "pinCode": "0000",
+          "init": [
+            "sim:1"
+          ],
+          "pdpContext": {
+            "id": 1,
+            "type": "ipv4",
+            "static": true,
+            "apn": "ip2",
+            "auth": {
+              "protocol": "none",
+              "username": "",
+              "password": ""
+            }
+          }
+        },
+        {
+          "id": 2,
+          "name": "SIM2",
+          "pinCode": "",
+          "init": [
+            "sim:2"
+          ],
+          "pdpContext": {
+            "id": 1,
+            "type": "ipv4",
+            "static": true,
+            "apn": "internet",
+            "auth": {
+              "protocol": "none",
+              "username": "",
+              "password": ""
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

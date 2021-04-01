@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"log"
 	"os/exec"
 	"regexp"
 	"strconv"
@@ -17,15 +18,16 @@ func main() {
 	// out, err := apt.CheckForUpdates()
 	// list, _ := ListUpgradable()
 	// fmt.Println(len(list))
-	list, _ := getUpgradableList()
-	dlist := getUpgradableListDetial(list)
-	fmt.Println(len(dlist))
+	// t()
+	// list, _ := getUpgradableList()
+	// dlist := getUpgradableListDetial(list)
+	// fmt.Println(len(list))
 	// fmt.Println(dlist[0].DownloadSizeKB)
 	// fmt.Println(dlist[0].InstalledSizeKB)
-	for _, d := range dlist[1].Depends {
-		fmt.Println(d)
+	// for _, d := range dlist[].Depends {
+	// 	fmt.Println(d)
 
-	}
+	// }
 	// fmt.Println(dlist[1].InstalledSizeKB)
 	// fmt.Println(dlist[1])
 
@@ -38,6 +40,8 @@ func main() {
 	// AptList()
 	// AptSearch("wpasupplicant")
 	// AptUpgrade("libepub0")
+	dryrun()
+
 }
 
 func AptUpdate() {
@@ -118,6 +122,47 @@ func AptListUpgradable() {
 // 	}
 // 	fmt.Println(string(out))
 // }
+
+func t() {
+	cmd := exec.Command("apt", "list", "--upgradable")
+	grep := exec.Command("grep", "ap")
+
+	// Get ps's stdout and attach it to grep's stdin.
+	pipe, _ := cmd.StdoutPipe()
+	defer pipe.Close()
+
+	grep.Stdin = pipe
+
+	// Run ps first.
+	cmd.Start()
+
+	// Run and get the output of grep.
+	res, _ := grep.Output()
+
+	fmt.Println(string(res))
+}
+
+func dryrun() []string {
+	deps := []string{}
+	cmd := exec.Command("apt", "install", "--dry-run", "nvidia-prime")
+	out, err := cmd.Output()
+	if err != nil {
+		log.Printf("apt get upgradable list failed: %s\n,", err.Error())
+		return deps
+	}
+	s := strings.Split(string(out), "\n")
+	for i := range s {
+		// if s[i] == "The following packages will be upgraded:" {
+		// 	deps = strings.Split(strings.TrimSpace(s[i+1]), " ")
+		// }
+		if conf := strings.Split(strings.TrimSpace(s[i]), " "); conf[0] == "Conf" {
+			deps = append(deps, conf[1])
+			fmt.Println(conf[2][1:])
+		}
+	}
+	fmt.Println(deps)
+	return deps
+}
 
 func getUpgradableList() ([]Package, error) {
 	cmd := exec.Command("apt", "list", "--upgradable")

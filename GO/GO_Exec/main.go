@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	cmd := exec.Command("apt-get", "remove", "rolldice", "-y")
+	cmd := exec.Command("ls")
 	// if runtime.GOOS == "windows" {
 	// 	cmd = exec.Command("tasklist")
 	// }

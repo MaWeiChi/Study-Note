@@ -1,0 +1,37 @@
+[
+    {
+      "displayName": "eth0",
+      "id": 1,
+      "name": "eth0",
+      "enable": true,
+      "status": "connected",
+      "ip": "10.144.48.145",
+      "netmask": "255.255.252.0",
+      "subnet": "10.144.48.0",
+      "broadcast": "10.144.51.255",
+      "gateway": "10.144.51.254",
+      "dns": [
+        "10.144.200.12",
+        "10.144.200.11"
+      ],
+      "mac": "00:90:e8:79:46:71",
+      "speed": "100 Mbps"
+    },
+    {
+      "displayName": "eth1",
+      "id": 2,
+      "name": "eth1",
+      "enable": true,
+      "status": "connected",
+      "ip": "192.168.3.207",
+      "netmask": "255.255.255.0",
+      "subnet": "192.168.3.0",
+      "broadcast": "192.168.3.255",
+      "gateway": "192.168.3.1",
+      "dns": [
+        "192.168.3.1"
+      ],
+      "mac": "00:90:e8:79:46:72",
+      "speed": "100 Mbps"
+    }
+  ]

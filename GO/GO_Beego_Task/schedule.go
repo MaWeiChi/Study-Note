@@ -28,6 +28,7 @@ func (s *schedule) NewSchedule(taskName, schedule string, taskFunc toolbox.TaskF
 	task := toolbox.NewTask(taskName, s.Parser(schedule), taskFunc)
 	s.Tasklist[taskName] = task
 	toolbox.AddTask(taskName, task)
+	fmt.Println(task.GetNext())
 }
 
 func (s *schedule) StartSchedule() {
@@ -55,7 +56,8 @@ func (s *schedule) UpdateSchedule(taskName, schedule string, taskFunc toolbox.Ta
 
 	if s.SpecStr != schedule || &s.Tasklist[taskName].DoFunc != &taskFunc {
 		toolbox.DeleteTask(taskName)
-		s.NewSchedule(taskName, s.Parser(schedule), taskFunc)
+		s.NewSchedule(taskName, schedule, taskFunc)
+
 	}
 
 	if enable {
@@ -64,7 +66,7 @@ func (s *schedule) UpdateSchedule(taskName, schedule string, taskFunc toolbox.Ta
 }
 
 func (s *schedule) Parser(task string) string {
-	splits := strings.Split(task, ",")
+	splits := strings.Split(task, " ")
 	switch len(splits) {
 	case 4:
 		return fmt.Sprintf("0 0 %s %s %s %s ", splits[0], splits[1], splits[2], splits[3])

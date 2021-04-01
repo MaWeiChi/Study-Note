@@ -1,0 +1,26 @@
+{
+  "data": {
+    "description": "",
+    "hostName": "Moxa",
+    "modelName": "UC-8220-T-LX-EU-S",
+    "serialNumber": "TAIGB1193253",
+    "firmwareVersion": "V1.3",
+    "biosVersion": "2.3.0S01",
+    "memorySize": 2116820992,
+    "cpu": "ARMv7 Processor rev 5 (v7l)",
+    "disk": [
+      {
+        "name": "System",
+        "mount": "/",
+        "device": "/dev/root",
+        "total": 6936092672,
+        "free": 4090670080,
+        "used": 2554092544,
+        "percent": 38.43767924492828
+      }
+    ],
+    "osType": "Linux",
+    "lastBootTime": "2021-03-08T09:56:42+08:00",
+    "thingsProProduct": "ThingsPro Edge V2.2.0"
+  }
+}

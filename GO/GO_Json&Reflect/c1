@@ -1,0 +1,43 @@
+[
+  {
+    "displayName": "Cellular1",
+    "id": 1,
+    "name": "usb1",
+    "enable": true,
+    "status": "connected",
+    "ip": "111.70.4.188",
+    "netmask": "255.255.255.255",
+    "subnet": "",
+    "broadcast": "",
+    "gateway": "111.70.4.67",
+    "dns": [
+      "168.95.1.1",
+      "168.95.192.1"
+    ],
+    "mac": "02:01:05:19:00:0b",
+    "speed": "LTE",
+    "strength": "Fair",
+    "rssi": -63.5,
+    "rsrp": -98
+  },
+   {
+    "displayName": "Cellular1",
+    "id": 1,
+    "name": "usb2",
+    "enable": true,
+    "status": "connected",
+    "ip": "111.70.4.188",
+    "netmask": "255.255.255.255",
+    "subnet": "",
+    "broadcast": "",
+    "gateway": "111.70.4.67",
+    "dns": [
+      "168.95.1.1",
+      "168.95.192.1"    ],
+    "mac": "02:01:05:19:00:0b",
+    "speed": "LTE",
+    "strength": "Fair",
+    "rssi": -63.5,
+    "rsrp": -98
+  }
+]

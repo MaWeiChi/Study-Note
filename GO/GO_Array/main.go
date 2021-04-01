@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Array struct {
 	Array []string
@@ -22,6 +24,11 @@ func main() {
 	xs = append(xs, xs2...)
 
 	fmt.Println(xs)
+
+	fmt.Println(xs[1:])
+	fmt.Println(xs[2:])
+	fmt.Println(xs[3:])
+
 }
 
 func SliceIndex(limit int, predicate func(i int) bool) int {

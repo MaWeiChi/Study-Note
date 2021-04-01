@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/tidwall/gjson"
 )
@@ -45,6 +46,10 @@ type WifiEntry struct {
 }
 
 func main() {
+	getCellular()
+}
+
+func oldTest() {
 
 	file, err := os.Open("/home/moxa/Study-Note/GO/GO_Json&Gjson/config")
 	if err != nil {
@@ -86,11 +91,42 @@ func main() {
 	fmt.Println(Add)
 	fmt.Println(Add.Ssid)
 	fmt.Println(json.Marshal(Add))
-	fmt.Println(gjson.Get(string(bytes2), "*d").Str)
-	fmt.Println(gjson.Get(string(bytes2), "p*d").Str)
-
 	fmt.Println(gjson.Get(string(bytes2), "pas?word").Str)
 	if gjson.Get(string(bytes2), "mode").Str == "" {
 		fmt.Println(`if the gjson doesn't exist, it will retrun a result with "" str`)
 	}
+}
+
+func getCellular() {
+	cell, err := os.Open("/home/moxa/Erik/Study-Note/GO/GO_Json&Gjson/cellr")
+	if err != nil {
+		panic(err)
+	}
+	d, err := ioutil.ReadAll(cell)
+	if err != nil {
+		panic(err)
+	}
+	var cellulars []CellularInfo
+	obj := gjson.GetBytes(d, `data`).String()
+	if err = json.Unmarshal([]byte(obj), &cellulars); err != nil {
+		fmt.Printf("Get device cellulars failed, err: %v\n", err)
+		return
+	}
+	for i := range cellulars {
+		signal := gjson.Get(obj, fmt.Sprintf(`%d.signal`, i)).String()
+		fmt.Println(gjson.Get(signal, `level`).Int())
+		if err = json.Unmarshal([]byte(signal), &cellulars[i]); err != nil {
+			fmt.Printf("Get cellulars signal failed, err: %v\n", err)
+			continue
+		}
+		cellulars[i].Strength = convertCellularSignalLevel(cellulars[i].Level)
+		cellulars[i].Speed = strings.ToUpper(gjson.Get(signal, `rat`).String())
+		if cellulars[i].DisplayName == "" {
+			cellulars[i].DisplayName = cellulars[i].Name
+		}
+		if cellulars[i].DNS == nil {
+			cellulars[i].DNS = []string{}
+		}
+	}
+	fmt.Println(cellulars)
 }

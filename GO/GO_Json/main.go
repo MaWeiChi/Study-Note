@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+
+	"github.com/tidwall/sjson"
 )
 
 type TimeEntry struct {
@@ -37,9 +39,13 @@ type AddEntry struct {
 	Priority int    `json:"priority"`
 }
 
+type E struct {
+	Data AddEntry `json:"data"`
+}
+
 func main() {
 
-	file, err := os.Open("/home/moxa/Study-Note/GO/GO_Json/config")
+	file, err := os.Open("/home/moxa/Erik/Study-Note/GO/GO_Json/config2")
 	if err != nil {
 		panic(err)
 	}
@@ -47,13 +53,22 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	var Addlist []AddEntry
+	var Addlist AddEntry
 	if err := json.Unmarshal(bytes, &Addlist); err != nil {
 		fmt.Println(err.Error())
 	}
+	b, _ := json.Marshal(Addlist)
 	fmt.Println(Addlist)
-	fmt.Println(Addlist[0].Ssid)
-	fmt.Println(json.Marshal(Addlist))
+	fmt.Println(Addlist.Ssid)
+	fmt.Println(b)
+	fmt.Println((string(b)))
+	var e E
+	e.Data = Addlist
+	q, _ := json.Marshal(e)
+	fmt.Println((string(q)))
+
+	respResult, err := sjson.Set(string(q), "request-id", "123")
+	fmt.Println(respResult)
 	// data := `{"type": "time", "timezone": "Asia/Taipei", "ntp": {"enable": true, "source": "timeserver", "server": "pool.ntp.or", "gpsLongJump": true, "interval": 60}}`
 	// var time TimeEntry
 	// if err := json.Unmarshal([]byte(data), &time); err != nil {
