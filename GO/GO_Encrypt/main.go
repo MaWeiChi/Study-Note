@@ -12,6 +12,8 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+
+	"github.com/sirupsen/logrus"
 )
 
 var extractDir = "."
@@ -43,54 +45,54 @@ func encrypt(data []byte, passphrase string) []byte {
 	return ciphertext
 }
 
-func decrypt(data []byte, passphrase string) []byte {
+func decrypt(data []byte, passphrase string) ([]byte, error) {
 	key := []byte(createHash(passphrase))
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		panic(err.Error())
+		return nil, err
 	}
 	gcm, err := cipher.NewGCM(block)
 	if err != nil {
-		panic(err.Error())
+		return nil, err
 	}
 	nonceSize := gcm.NonceSize()
 	nonce, ciphertext := data[:nonceSize], data[nonceSize:]
 	plaintext, err := gcm.Open(nil, nonce, ciphertext, nil)
 	if err != nil {
-		panic(err.Error())
+		return nil, err
 	}
-	return plaintext
+
+	return plaintext, err
 }
 
-func encryptfile(filename string, data []byte, passphrase string) {
-	f, _ := os.Create(filename)
-	defer f.Close()
-	f.Write(encrypt(data, passphrase))
-}
-
-func decryptFile(filename string, passphrase string) []byte {
-	data, _ := ioutil.ReadFile(filename)
+func decryptFile(filename string, passphrase string) ([]byte, error) {
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
 	return decrypt(data, passphrase)
 }
 
 func main() {
-	fmt.Println("Starting the application...")
-	ciphertext := encrypt([]byte("Hello World"), "password")
-	fmt.Printf("Encrypted: %x\n", ciphertext)
-	plaintext := decrypt(ciphertext, "password")
-	fmt.Printf("Decrypted: %s\n", plaintext)
-	encryptfile("sample.txt", []byte("Hello Word"), "password1")
-	encryptFile("2020-06-05-10-28-backup.zip", "a_aes.tar.gz", "example key 1234")
-	data, _ := ioutil.ReadFile("2020-06-18-17-14-backup.tar.gz")
-	encryptfile("2020-06-18-17-14-backup.tar.gz.encryption", data, "password1")
-	data = decryptFile("sample.tar.gz", "password1")
-
-	ioutil.WriteFile(filepath.Join(extractDir, "2020-06-18-17-14-backup.tar."), data, 0755)
+	// fmt.Println("Starting the application...")
+	// ciphertext := encrypt([]byte("Hello World"), "password")
+	// fmt.Printf("Encrypted: %x\n", ciphertext)
+	// plaintext := decrypt(ciphertext, "password")
+	// fmt.Printf("Decrypted: %s\n", plaintext)
+	// encryptfile("sample.txt", []byte("Hello Word"), "password1")
+	// encryptFile("2020-06-05-10-28-backup.zip", "a_aes.tar.gz", "example key 1234")
+	// data, _ := ioutil.ReadFile("2020-06-18-17-14-backup.tar.gz")
+	// encryptfile("2020-06-18-17-14-backup.tar.gz.encryption", data, "password1")
+	data, err := decryptFile("/home/moxa/Erik/Study-Note/GO/GO_Encrypt/backup.tar.gz", "!2345678")
+	if err != nil {
+		fmt.Println("decryptFile err")
+		fmt.Println(err.Error())
+	}
+	ioutil.WriteFile(filepath.Join(extractDir, "2020-06-18-17-14-backup.tar.gz"), data, 0755)
 
 	data, _ = ioutil.ReadFile("2020-06-18-17-14-backup.tar.gz")
-	encryptfile("2020-06-18-17-14-backup.tar.gz.encryption", data, "password1")
-
-	filename := "2020-06-19-17-42-backup.tar.gz"
+	// encryptfile("2020-06-18-17-14-backup.tar.gz.encryption", data, "password1")
+	filename := "2020-06-18-17-14-backup.tar.gz"
 
 	br, _ := os.Open(filename)
 	gr, err := gzip.NewReader(br)
@@ -109,17 +111,20 @@ func main() {
 		if err == io.EOF {
 			break
 		}
-		// if f.FileInfo().IsDir() {
-		// 	continue
-		// }
-
-		os.MkdirAll(filepath.Join(extractDir, filepath.Dir(f.Name)), 0755)
-		data := make([]byte, f.Size)
-		_, err = tr.Read(data)
-		if err != nil && err != io.EOF {
+		if err != nil {
+			fmt.Println(err.Error())
 		}
-
-		ioutil.WriteFile(filepath.Join(extractDir, f.Name), data, 0755)
+		if f.FileInfo().IsDir() {
+			continue
+		}
+		logrus.Debugf("extract %s", f.Name)
+		os.MkdirAll(filepath.Join(extractDir, filepath.Dir(f.Name)), 0755)
+		file, err := os.Create(filepath.Join(extractDir, f.Name))
+		if err != nil {
+			logrus.Debugf("create file %s failed", f.Name)
+			continue
+		}
+		io.Copy(file, tr)
 
 	}
 	gr.Close()

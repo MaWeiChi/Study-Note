@@ -1,0 +1,22 @@
+{
+  "@data": {
+    "id": 1,
+    "type": "iptables",
+    "firewall": [
+      {
+        "id": 1,
+        "enable": true,
+        "default": true,
+        "action": "drop",
+        "direction": "inbound",
+        "interface": "",
+        "protocol": "",
+        "srcIp": "",
+        "srcPort": "",
+        "destIp": "",
+        "destPort": ""
+      }
+    ]
+  },
+  "@version": 1
+}

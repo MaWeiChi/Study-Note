@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"regexp"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/shirou/gopsutil/v3/cpu"
+	"github.com/shirou/gopsutil/v3/disk"
 	"github.com/shirou/gopsutil/v3/host"
 	"github.com/shirou/gopsutil/v3/net"
+
 	"github.com/tidwall/sjson"
 )
 
@@ -108,11 +111,12 @@ func main() {
 	// fmt.Println(mu.Total)
 	// fmt.Println(mu.Usage)
 
-	for i := 0; i < 20; i++ {
-		getCPUUsage()
-		time.Sleep(time.Duration(1 * time.Second))
-	}
-
+	// for i := 0; i < 20; i++ {
+	// 	getCPUUsage()
+	// 	time.Sleep(time.Duration(10 * time.Second))
+	// }
+	// fmt.Println(GetDiskUsage("System"))
+	fmt.Println(getTxRx())
 }
 
 // Get : get network statistic entries
@@ -238,4 +242,57 @@ func taghubTestFunc(c *gin.Context) {
 			{"prvdName":"system","srcName":"status","tagName":"cpuUsage","ts":1581659603,"dataUnit":"%","dataType":"int64","dataValue":76},
 			{"prvdName":"system","srcName":"status","tagName":"cpuUsage","ts":1581659603,"dataUnit":"%","dataType":"int64","dataValue":76},
 			{"prvdName":"system","srcName":"status","tagName":"memoryUsage","ts":1581659603,"dataUnit":"%","dataType":"uint64","dataValue":71}]}`)
+}
+
+type DiskUsage struct {
+	Used    uint64
+	Free    uint64
+	Percent float64
+}
+
+// GetDiskUsage ...
+func GetDiskUsage(mountpoint string) (DiskUsage, error) {
+	u, e := disk.Usage(mountpoint)
+	if e != nil {
+		// cmd.Logger.Printf("Error: disk.Usage(%s) %v\n", mountpoint, e)
+		return DiskUsage{}, e
+	}
+
+	du := DiskUsage{
+		Used:    u.Used,
+		Free:    u.Free,
+		Percent: u.UsedPercent,
+	}
+	// cmd.Logger.Printf("disk.Usage(%s): %v\n", mountpoint, du)
+
+	return du, nil
+}
+
+var (
+	excludeRegex = []string{
+		`^lo$`,
+		`^docker0$`,
+		`^veth[a-z0-9@]+$`,
+		`^br-[a-z0-9]+$`,
+	}
+)
+
+var leastTx map[string]uint64
+var leastRx map[string]uint64
+
+func getTxRx() (tx, rx map[string]uint64) {
+	tx = make(map[string]uint64)
+	rx = make(map[string]uint64)
+	counterStats, _ := net.IOCounters(true)
+
+	exclude := strings.Join(excludeRegex, "|")
+	for _, cs := range counterStats {
+		if match, ok := regexp.MatchString(exclude, cs.Name); match || (ok != nil) {
+			continue
+		}
+		tx[cs.Name] = cs.BytesSent
+		rx[cs.Name] = cs.BytesRecv
+	}
+
+	return tx, rx
 }

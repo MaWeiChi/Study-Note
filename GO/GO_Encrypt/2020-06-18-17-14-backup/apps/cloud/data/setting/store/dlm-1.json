@@ -1,0 +1,8 @@
+{
+  "enable": true,
+  "targetDiskName": "System",
+  "desiredDiskCacheSizeMB": 10,
+  "timeToLiveSec": 7200,
+  "dropBehavior": "oldest",
+  "disks": null
+}

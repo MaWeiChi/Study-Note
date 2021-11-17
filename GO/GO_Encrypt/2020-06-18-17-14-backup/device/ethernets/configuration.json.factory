@@ -1,0 +1,56 @@
+{
+  "@data": [
+    {
+      "id": 1,
+      "type": "ethernets",
+      "displayName": "LAN1",
+      "name": "eth0",
+      "status": "disconnected",
+      "mac": "",
+      "wan": true,
+      "ip": "192.168.3.127",
+      "netmask": "255.255.255.0",
+      "subnet": "192.168.3.0",
+      "gateway": "192.168.3.254",
+      "broadcast": "192.168.3.254",
+      "dns": [],
+      "enable": true,
+      "enableDhcp": true
+    },
+    {
+      "id": 2,
+      "type": "ethernets",
+      "displayName": "LAN2",
+      "name": "eth1",
+      "status": "disconnected",
+      "mac": "",
+      "wan": false,
+      "ip": "192.168.4.127",
+      "netmask": "255.255.255.0",
+      "subnet": "192.168.4.0",
+      "gateway": "192.168.4.254",
+      "broadcast": "192.168.4.254",
+      "dns": [],
+      "enable": true,
+      "enableDhcp": false
+    },
+    {
+      "id": 3,
+      "type": "ethernets",
+      "displayName": "Wi-Fi1",
+      "name": "wlan0",
+      "status": "disconnected",
+      "mac": "",
+      "wan": false,
+      "ip": "192.168.5.1",
+      "netmask": "255.255.255.0",
+      "subnet": "192.168.5.0",
+      "gateway": "192.168.5.254",
+      "broadcast": "192.168.5.254",
+      "dns": [],
+      "enable": true,
+      "enableDhcp": false
+    }
+  ],
+  "@version": 1
+}

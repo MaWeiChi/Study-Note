@@ -1,0 +1,22 @@
+location ~* ^/(?!api)/.*\.(jpg|jpeg|gif|png|gz|cur|svg|svgz|mp4|ogg|ogv|webm|htc|js|css)$ {
+  root /var/www/apps/edge-web;
+  expires 365d;
+  access_log off;
+  add_header Cache-Control "max-age=31536000";
+}
+
+location ~* \.ico$ {
+  root /var/www/apps/edge-web;
+  expires 365d;
+  access_log off;
+  add_header Cache-Control "public";
+}
+
+location / {
+  root /var/www/apps/edge-web;
+  try_files $uri $uri/ /index.html =404;
+  add_header X-Frame-Options "SAMEORIGIN";
+  add_header X-Content-Type-Options nosniff;
+  add_header X-XSS-Protection "1; mode=block";
+  add_header Cache-Control "no-cache";
+}

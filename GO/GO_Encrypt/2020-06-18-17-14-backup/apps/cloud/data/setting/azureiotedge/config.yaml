@@ -1,0 +1,20 @@
+agent:
+  config:
+    auth: {}
+    image: mcr.microsoft.com/azureiotedge-agent:1.0.10.3
+  env: {}
+  name: edgeAgent
+  type: docker
+connect:
+  management_uri: unix:///var/run/iotedge/mgmt.sock
+  workload_uri: unix:///var/run/iotedge/workload.sock
+homedir: /var/lib/iotedge
+hostname: BarryCai-UC82
+listen:
+  management_uri: fd://iotedge.mgmt.socket
+  workload_uri: fd://iotedge.socket
+moby_runtime:
+  uri: unix:///var/run/docker.sock
+provisioning:
+  device_connection_string: <ADD DEVICE CONNECTION STRING HERE>
+  source: manual

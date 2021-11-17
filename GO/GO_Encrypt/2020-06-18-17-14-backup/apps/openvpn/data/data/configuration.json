@@ -1,0 +1,12 @@
+{
+	"type": "openvpn",
+	"enable": false,
+	"status": false,
+	"profile": "dlm.ovpn",
+	"network": {
+		"remoteIp": "",
+		"localIp": "",
+		"netmask": "",
+		"gateway": ""
+	}
+}

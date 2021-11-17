@@ -1,0 +1,468 @@
+{
+  "properties": [
+    {
+      "name": "device app",
+      "redisKey": "hardware:*",
+      "properties": [
+        {
+          "name": "ethernets",
+          "args": [
+            "ethernets",
+            "*"
+          ],
+          "desired": {
+            "path": "/device/ethernets",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/devicedb?type=ethernets",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "type"
+          ]
+        },
+        {
+          "name": "gps",
+          "args": [
+            "gps",
+            "*"
+          ],
+          "desired": {
+            "path": "/device/gps",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/device/gps",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "capabilities",
+            "type",
+            "interface"
+          ]
+        },
+        {
+          "name": "cellulars",
+          "args": [
+            "cellulars",
+            "*"
+          ],
+          "desired": {
+            "path": "/device/cellulars",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/device/cellulars",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "signal",
+            "type"
+          ]
+        },
+        {
+          "name": "general",
+          "args": [
+            "general",
+            "*"
+          ],
+          "desired": {
+            "path": "/device/general",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/device/general",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "type",
+            "disk",
+            "memorySize",
+            "description"
+          ]
+        },
+        {
+          "name": "serials",
+          "args": [
+            "serials",
+            "*"
+          ],
+          "desired": {
+            "path": "/device/serials",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/devicedb?type=serials",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "capabilities",
+            "type"
+          ]
+        },
+        {
+          "name": "time",
+          "args": [
+            "time",
+            "*"
+          ],
+          "desired": {
+            "path": "/device/time",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/device/time",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "time",
+            "type",
+            "ntp.gpsLongJump",
+            "ntp.interval",
+            "ntp.server",
+            "ntp.source"
+          ]
+        },
+        {
+          "name": "route",
+          "args": [
+            "route",
+            "*"
+          ],
+          "desired": {
+            "path": "/device/route",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/device/route",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "type",
+            "priorityList"
+          ]
+        },
+        {
+          "name": "wan",
+          "args": [
+            "wan",
+            "*"
+          ],
+          "desired": {
+            "path": "",
+            "method": ""
+          },
+          "source": {
+            "path": "/device/network/wan",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "type"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "system services",
+      "redisKey": "api:system:*",
+      "properties": [
+        {
+          "name": "serialconsole",
+          "args": [
+            "serialconsole"
+          ],
+          "desired": {
+            "path": "/system/serialconsole",
+            "method": "PUT"
+          },
+          "source": {
+            "path": "/system/serialconsole",
+            "method": "GET"
+          },
+          "sourceFilter": null
+        },
+        {
+          "name": "discovery",
+          "args": [
+            "discovery"
+          ],
+          "desired": {
+            "path": "/system/discovery",
+            "method": "PUT"
+          },
+          "source": {
+            "path": "/system/discovery",
+            "method": "GET"
+          },
+          "sourceFilter": null
+        },
+        {
+          "name": "sshserver",
+          "args": [
+            "sshserver"
+          ],
+          "desired": {
+            "path": "/system/sshserver",
+            "method": "PUT"
+          },
+          "source": {
+            "path": "/system/sshserver",
+            "method": "GET"
+          },
+          "sourceFilter": null
+        },
+        {
+          "name": "httpserver",
+          "args": [
+            "httpserver"
+          ],
+          "desired": {
+            "path": "/system/httpserver",
+            "method": "PUT"
+          },
+          "source": {
+            "path": "/system/httpserver",
+            "method": "GET"
+          },
+          "sourceFilter": [
+            "certFileName",
+            "keyFileName",
+            "ipv6Enable"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "apps runtime",
+      "redisKey": "",
+      "properties": [
+        {
+          "name": "apps",
+          "args": [
+            "*"
+          ],
+          "desired": {
+            "path": "/dlm/apps",
+            "method": "PATCH"
+          },
+          "source": {
+            "path": "/dlm/apps",
+            "method": "GET"
+          },
+          "sourceFilter": null
+        }
+      ]
+    },
+    {
+      "name": "dlm",
+      "redisKey": "",
+      "properties": [
+        {
+          "name": "control",
+          "args": [
+            "control"
+          ],
+          "desired": {
+            "path": "/dlm/control",
+            "method": "PUT"
+          },
+          "source": {
+            "path": "",
+            "method": ""
+          },
+          "sourceFilter": [
+            "status"
+          ]
+        },
+        {
+          "name": "dashboard",
+          "args": [
+            "dashboard"
+          ],
+          "desired": {
+            "path": "/dlm/dashboard",
+            "method": "PUT"
+          },
+          "source": {
+            "path": "/dlm/dashboard",
+            "method": "GET"
+          },
+          "sourceFilter": null
+        },
+        {
+          "name": "edition",
+          "args": [
+            "edition"
+          ],
+          "desired": {
+            "path": "",
+            "method": ""
+          },
+          "source": {
+            "path": "/dlm/edition",
+            "method": "GET"
+          },
+          "sourceFilter": null
+        }
+      ]
+    }
+  ],
+  "selections": {
+    "apps runtime": {
+      "apps": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "applications",
+          "desiredPath": "applications"
+        }
+      ]
+    },
+    "device app": {
+      "cellulars": [
+        {
+          "urlModePath": "cellulars",
+          "source": "",
+          "reportedPath": "cellulars",
+          "desiredPath": "cellulars"
+        }
+      ],
+      "ethernets": [
+        {
+          "urlModePath": "ethernets",
+          "source": "",
+          "reportedPath": "ethernets",
+          "desiredPath": "ethernets"
+        }
+      ],
+      "general": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "general",
+          "desiredPath": "general"
+        }
+      ],
+      "gps": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "gps",
+          "desiredPath": "gps"
+        }
+      ],
+      "route": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "route",
+          "desiredPath": "route"
+        }
+      ],
+      "serials": [
+        {
+          "urlModePath": "serials",
+          "source": "",
+          "reportedPath": "serials",
+          "desiredPath": "serials"
+        }
+      ],
+      "time": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "time",
+          "desiredPath": "time"
+        }
+      ],
+      "wan": [
+        {
+          "urlModePath": "",
+          "source": "displayName",
+          "reportedPath": "wan",
+          "desiredPath": "wan"
+        }
+      ]
+    },
+    "dlm": {
+      "control": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "",
+          "desiredPath": "application-dlm"
+        }
+      ],
+      "dashboard": [
+        {
+          "urlModePath": "application-dlm-dashboard",
+          "source": "",
+          "reportedPath": "application-dlm-dashboard",
+          "desiredPath": "application-dlm-dashboard"
+        }
+      ],
+      "edition": [
+        {
+          "urlModePath": "",
+          "source": "edition",
+          "reportedPath": "edition",
+          "desiredPath": "edition"
+        }
+      ]
+    },
+    "system services": {
+      "discovery": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "discovery",
+          "desiredPath": "discovery"
+        }
+      ],
+      "events": [
+        {
+          "urlModePath": "",
+          "source": "enable",
+          "reportedPath": "eventlog.enable",
+          "desiredPath": "eventlog.enable"
+        }
+      ],
+      "httpserver": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "httpserver",
+          "desiredPath": "httpserver"
+        }
+      ],
+      "log": [
+        {
+          "urlModePath": "",
+          "source": "enable",
+          "reportedPath": "systemlog.enable",
+          "desiredPath": "systemlog.enable"
+        }
+      ],
+      "serialconsole": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "serialconsole",
+          "desiredPath": "serialconsole"
+        }
+      ],
+      "sshserver": [
+        {
+          "urlModePath": "",
+          "source": "",
+          "reportedPath": "sshserver",
+          "desiredPath": "sshserver"
+        }
+      ]
+    }
+  },
+  "connectionID": "dlm-1",
+  "enable": true,
+  "SkipFirstComplete": false
+}

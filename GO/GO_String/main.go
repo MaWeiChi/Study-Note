@@ -21,6 +21,10 @@ func main() {
 	fmt.Println(t)
 	// fmt.Println(string([]byte)
 	fmt.Println(s2 + "sd")
+
+	fmt.Println(modelName[:1])
+	fmt.Println(modelName[1:])
+
 }
 
 func readPversion() FileVersionInfo {

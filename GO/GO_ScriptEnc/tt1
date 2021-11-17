@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# if [ $inputEnv ]; then
+#     echo "True"
+#     # /bin/bash /home/moxa/Erik/Study-Note/GO/GO_ScriptEnc/ttt2&
+# else
+#     echo "False"
+# fi
+
+if [ $(pgrep -o -x zsh) > 0 ]; then
+    echo "True"
+else
+    echo "False"
+fi

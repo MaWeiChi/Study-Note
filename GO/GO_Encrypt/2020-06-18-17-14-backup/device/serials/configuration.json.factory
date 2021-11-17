@@ -1,0 +1,51 @@
+{
+  "@data": [
+    {
+      "id": 1,
+      "displayName": "COM1",
+      "type": "serials",
+      "device": "/dev/ttyM0",
+      "mode": "rs232",
+      "baudRate": 9600,
+      "parity": "none",
+      "dataBits": 8,
+      "stopBits": 1,
+      "flowControl": "none",
+      "capabilities": {
+        "mode": ["rs232", "rs422", "rs4852w", "rs4854w"],
+        "baudRate": {
+          "special": false,
+          "range": [300, 600, 1200, 1800, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600]
+        },
+        "parities": ["none", "odd", "even", "space", "mark"],
+        "dataBits": [5, 6, 7, 8],
+        "stopBits": [1, 2],
+        "flowControl": ["none", "hardware", "software"]
+      }
+    },
+    {
+      "id": 2,
+      "displayName": "COM2",
+      "type": "serials",
+      "device": "/dev/ttyM1",
+      "mode": "rs232",
+      "baudRate": 9600,
+      "parity": "none",
+      "dataBits": 8,
+      "stopBits": 1,
+      "flowControl": "none",
+      "capabilities": {
+        "mode": ["rs232", "rs422", "rs4852w", "rs4854w"],
+        "baudRate": {
+          "special": false,
+          "range": [300, 600, 1200, 1800, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600]
+        },
+        "parities": ["none", "odd", "even", "space", "mark"],
+        "dataBits": [5, 6, 7, 8],
+        "stopBits": [1, 2],
+        "flowControl": ["none", "hardware", "software"]
+      }
+    }
+  ],
+  "@version": 1
+}

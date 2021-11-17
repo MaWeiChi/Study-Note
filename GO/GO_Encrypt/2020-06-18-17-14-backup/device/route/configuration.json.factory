@@ -1,0 +1,11 @@
+{
+  "@data": {
+    "type": "route",
+    "priorityList": [
+      "Wi-Fi1",
+      "Cellular1",
+      "LAN1"
+    ]
+  },
+  "@version": 1
+}

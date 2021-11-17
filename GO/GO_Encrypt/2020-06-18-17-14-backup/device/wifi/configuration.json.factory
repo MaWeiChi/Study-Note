@@ -1,0 +1,45 @@
+{
+  "@data": {
+    "wifis": [
+      {
+        "type": "wifi",
+        "name": "wlan0",
+        "displayName": "Wi-Fi1",
+        "available": false,
+        "status": false,
+        "capabilities": {
+          "mode": [
+            "ap",
+            "client"
+          ],
+          "band": []
+        },
+        "regions": null,
+        "id": 1,
+        "enable": false,
+        "mode": "ap",
+        "ap": {
+          "band": "band24",
+          "broadcastSsid": true,
+          "ssid": "moxa-sample-ap",
+          "channel": 6,
+          "region": "TW",
+          "security": {
+            "mode": "wpa2",
+            "encryption": "aes",
+            "password": "admin@123"
+          },
+          "clients": null
+        },
+        "client": {
+          "connectState": "",
+          "currentAp": "",
+          "priority": [],
+          "networks": []
+        }
+      }
+    ],
+    "layer3Set": {}
+  },
+  "@version": 2
+}

@@ -1,0 +1,13 @@
+{
+  "@data": {
+    "client": null,
+    "server": {
+      "enable": true,
+      "id": 1,
+      "ip": "0.0.0.0",
+      "port": 40404
+    },
+    "type": ""
+  },
+  "@version": 1
+}

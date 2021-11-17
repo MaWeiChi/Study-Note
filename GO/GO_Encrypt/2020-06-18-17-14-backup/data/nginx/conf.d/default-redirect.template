@@ -1,0 +1,24 @@
+server {
+  listen ${PORT};
+  server_name example.com;
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen ${TLSPORT} ssl http2;
+  server_name example.com;
+
+  ssl_certificate certs/${CERT};
+  ssl_certificate_key certs/${KEY};
+
+  ssl_session_timeout 5m;
+
+  ssl_protocols TLSv1.2;
+  ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+  ssl_prefer_server_ciphers on;
+  proxy_cookie_path / "/; HttpOnly; Secure; SameSite=Lax";
+
+  root /var/thingspro/www;
+  index index.html;
+  include conf.d/locations;
+}

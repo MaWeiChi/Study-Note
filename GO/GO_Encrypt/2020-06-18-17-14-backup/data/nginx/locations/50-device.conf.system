@@ -1,0 +1,57 @@
+location ~ ^/api/v1/device/ {
+	error_page 599 = @device-default-proxy;
+
+	location ~ ^/api/v1/device/(ethernets|gps|general|network/wan) {
+		if ($request_method = 'GET') {
+			set $auth_request "";
+			return 599;
+		}
+		set $auth_request "SYS_MAINTENANCE_RW";
+		return 599;
+	}
+
+
+	location ~ ^/api/v1/device/(serials|wifi|minicards|wan|iptables|firewall|route|dhcpservers|time|zoneinfo|dns|cellulars|_/overview|_/network/statistics|_/wifi|leds) {
+
+		set $auth_request "SYS_MAINTENANCE_RW";
+		return 599;
+	}
+
+}
+
+location @device-default-proxy {
+	if ($request_method = 'OPTIONS') {
+		add_header 'Access-Control-Allow-Origin' '*';
+		add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, DELETE, PUT';
+		add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,mx-api-token,mx-api-ts,authorization';
+		add_header 'Access-Control-Max-Age' 1728000;
+		add_header 'Content-Type' 'text/plain; charset=utf-8';
+		add_header 'Content-Length' 0;
+		return 204;
+	}
+
+	auth_request /api/v1/auth;
+	auth_request_set $auth_status $upstream_status;
+	auth_request_set $auth_uid $upstream_http_x_auth_uid;
+	auth_request_set $auth_username $upstream_http_x_auth_username;
+	proxy_set_header X-Auth-Uid $auth_uid;
+	proxy_set_header X-Auth-Username $auth_username;
+
+	add_header 'Access-Control-Allow-Origin' '*';
+	add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, DELETE, PUT';
+	add_header 'Access-Control-Allow-Headers' 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,mx-api-token,mx-api-ts,authorization';
+	proxy_connect_timeout       300;
+	proxy_send_timeout          300;
+	proxy_read_timeout          300;
+	send_timeout                300;
+	proxy_buffering             off;
+	proxy_redirect off;
+
+	proxy_set_header X-Real-Method $request_method;
+	proxy_set_header X-Real-IP $remote_addr;
+	proxy_set_header X-Forwarded-For $remote_addr;
+	proxy_set_header X-Scheme $scheme;
+	proxy_set_header X-Host $host;
+	proxy_set_header Host $host;
+	proxy_pass http://unix:/var/run/tpdevice.sock;
+}

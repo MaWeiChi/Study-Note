@@ -1,0 +1,9 @@
+location ^~ /api/_/installation {
+    limit_rate 2000k;
+    #proxy_ssl_certificate NONE;
+    #proxy_ssl_certificate_key NONE;
+    #proxy_ssl_trusted_certificate NONE;
+    #proxy_ssl_verify on;
+    proxy_ssl_server_name on;
+    proxy_pass http://127.0.0.1;
+}
