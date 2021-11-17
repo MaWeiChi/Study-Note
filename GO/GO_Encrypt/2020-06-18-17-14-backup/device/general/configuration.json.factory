@@ -1,0 +1,17 @@
+{
+  "@data": {
+    "type": "general",
+    "description": "",
+    "hostName": "Moxa",
+    "modelName": "",
+    "deviceType": "gateway",
+    "serialNumber": "",
+    "firmwareVersion": "",
+    "thingsproVersion": "",
+    "cpu": "",
+    "memorySize": 0,
+    "disk": null,
+    "lastBootTime": ""
+  },
+  "@version": 1
+}

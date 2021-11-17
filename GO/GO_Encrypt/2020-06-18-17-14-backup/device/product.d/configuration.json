@@ -1,0 +1,68 @@
+{
+    "modules": [
+        {
+            "name": "ethernets",
+            "enable": true
+        },
+        {
+            "name": "serials",
+            "enable": true
+        },
+        {
+            "name": "cellulars",
+            "enable": true
+        },
+        {
+            "name": "gps",
+            "enable": true
+        },
+        {
+            "name": "general",
+            "enable": true
+        },
+        {
+            "name": "route",
+            "enable": true
+        },
+        {
+            "name": "iptables",
+            "enable": false
+        },
+        {
+            "name": "dhcpservers",
+            "enable": true
+        },
+        {
+            "name": "time",
+            "enable": true
+        },
+        {
+            "name": "minicards",
+            "enable": true
+        },
+        {
+            "name": "discovery",
+            "enable": true
+        },
+        {
+            "name": "wifi",
+            "enable": true
+        },
+        {
+            "name": "firewall",
+            "enable": true
+        },
+        {
+            "name": "overview",
+            "enable": true
+        },
+        {
+            "name": "networkstatistics",
+            "enable": true
+        },
+        {
+            "name": "leds",
+            "enable": true
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+  "@data": {
+    "type": "gps",
+    "mode": "manual",
+    "interface": "",
+    "location": {
+      "lat": -44.7,
+      "lng": 169.15
+    },
+    "capabilities": {
+      "interface": [
+        ""
+      ]
+    }
+  },
+  "@version": 1
+}

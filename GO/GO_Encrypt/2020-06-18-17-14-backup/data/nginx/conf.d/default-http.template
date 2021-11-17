@@ -1,0 +1,9 @@
+server {
+  listen ${PORT};
+  ${IPV6CONFIGURATION}
+  server_name example.com;
+  proxy_cookie_path / "/; HttpOnly; SameSite=Lax";
+  root /var/thingspro/www;
+  index index.html;  
+  include conf.d/locations;
+}

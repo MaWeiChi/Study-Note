@@ -1,0 +1,1 @@
+{"provisioning":{"enable":false,"host":"","port":8883,"thingID":"","supportDM":true,"messageQOS":0,"retryInterval":10,"keepAliveSec":60,"certificate":{"rootCaCertFile":"","caCertFile":"","caPkFile":""}}}

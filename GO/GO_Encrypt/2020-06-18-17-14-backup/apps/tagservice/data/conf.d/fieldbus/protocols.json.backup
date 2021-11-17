@@ -1,0 +1,33 @@
+{
+ "protocolList": [
+  "eipscanner",
+  "modbusmaster"
+ ],
+ "sourceList": {
+  "modbusmaster": {
+   "protocolName": "modbusmaster",
+   "domainName": "172.31.8.1:59000/api/v1/modbusmaster",
+   "providers": [
+    "modbus_tcp_master",
+    "modbus_rtu_master"
+   ],
+   "methods": {
+    "tag-list": "platform/master-tags",
+    "direct-read": "operate/direct-read-tag",
+    "direct-write": "operate/direct-write-tag"
+   }
+  },
+  "eipscanner": {
+   "protocolName": "eipscanner",
+   "domainName": "172.31.8.1:59000/api/v1/eipscanner",
+   "providers": [
+    "eip-scanner"
+   ],
+   "methods": {
+    "tag-list": "platform/scanner-tags",
+    "direct-read": "operate/direct-read-tag",
+    "direct-write": "operate/direct-write-tag"
+   }
+  }
+ }
+}

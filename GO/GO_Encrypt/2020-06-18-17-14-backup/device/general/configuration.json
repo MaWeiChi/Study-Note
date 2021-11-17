@@ -1,0 +1,33 @@
+{
+  "@data": {
+    "type": "general",
+    "description": "",
+    "hostName": "BarryCai-UC82",
+    "modelName": "UC-8220-T-LX",
+    "deviceType": "gateway",
+    "serialNumber": "TBZEB1051950",
+    "firmwareVersion": "1.1",
+    "thingsproVersion": "2.1.0-2158",
+    "biosVersion": "2.2.0S02",
+    "cpu": "ARMv7 Processor rev 5 (v7l)",
+    "memorySize": 2116042752,
+    "disk": [
+      {
+        "name": "System",
+        "mount": "/",
+        "device": "/dev/root",
+        "total": 6948147200,
+        "free": 5562836992,
+        "used": 1093476352,
+        "percent": 16.42765740566675,
+        "tags": {
+          "used": "systemDiskUsed",
+          "free": "systemDiskFree",
+          "percent": "systemDiskPercent"
+        }
+      }
+    ],
+    "lastBootTime": "2021-09-03T13:29:58+08:00"
+  },
+  "@version": 1
+}

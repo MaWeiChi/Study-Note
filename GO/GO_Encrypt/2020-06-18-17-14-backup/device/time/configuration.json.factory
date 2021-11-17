@@ -1,0 +1,16 @@
+{
+  "@data": {
+    "type": "time",
+    "lastUpdateTime": "",
+    "time": "",
+    "timezone": "Asia/Taipei",
+    "ntp": {
+      "enable": false,
+      "source": "timeserver",
+      "server": "pool.ntp.org",
+      "gpsLongJump": true,
+      "interval": 7200
+    }
+  },
+  "@version": 1
+}

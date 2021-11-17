@@ -1,0 +1,31 @@
+{
+  "connection": {
+    "enable": true,
+    "retryDelaySec": 10,
+    "picTarget": "develop",
+    "service": "dlm"
+  },
+  "certificates": {
+    "caCertFile": "dev.crt",
+    "caPkFile": "dev.key",
+    "certificateInfo": {
+      "organization": "",
+      "issuerCN": "",
+      "notBefore": "",
+      "notAfter": "",
+      "modelName": "",
+      "macAddress": "",
+      "serialNumber": ""
+    }
+  },
+  "connectionStatus": {
+    "projectName": "",
+    "projectID": "",
+    "status": "",
+    "message": "",
+    "lastConnectedTime": "",
+    "lastConnectTime": "",
+    "lastDisconnectTime": "",
+    "statuslastUpdateTime": ""
+  }
+}

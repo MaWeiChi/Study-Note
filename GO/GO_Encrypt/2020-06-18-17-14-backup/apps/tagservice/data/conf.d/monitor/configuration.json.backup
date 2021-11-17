@@ -1,0 +1,48 @@
+{
+ "mode": "persistence",
+ "timeToLive": 60,
+ "watchList": {
+  "system/storage/systemDiskFree": {
+   "lastUpdateTs": "2021-09-08T07:43:08Z",
+   "intervalMs": 10000,
+   "watcher": {
+    "$tagstream-1631086988971106075": 0
+   }
+  },
+  "system/status/cpuUsage": {
+   "lastUpdateTs": "2021-09-08T07:43:08Z",
+   "intervalMs": 10000,
+   "watcher": {
+    "$tagstream-1631086988752675627": 0
+   }
+  },
+  "system/status/memoryUsage": {
+   "lastUpdateTs": "2021-09-08T07:43:08Z",
+   "intervalMs": 10000,
+   "watcher": {
+    "$tagstream-1631086988752675627": 0
+   }
+  },
+  "system/network/networkUsage": {
+   "lastUpdateTs": "2021-09-08T07:43:08Z",
+   "intervalMs": 10000,
+   "watcher": {
+    "$tagstream-1631086988858609366": 0
+   }
+  },
+  "system/network/networkTx": {
+   "lastUpdateTs": "2021-09-08T07:43:08Z",
+   "intervalMs": 10000,
+   "watcher": {
+    "$tagstream-1631086988858609366": 0
+   }
+  },
+  "system/network/networkRx": {
+   "lastUpdateTs": "2021-09-08T07:43:08Z",
+   "intervalMs": 10000,
+   "watcher": {
+    "$tagstream-1631086988858609366": 0
+   }
+  }
+ }
+}

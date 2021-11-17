@@ -1,0 +1,22 @@
+{
+  "provisioning": {
+    "enable": false,
+    "supportTwin": true,
+    "source": "manual",
+    "method": "",
+    "globalEndpoint": "",
+    "connectionString": "",
+    "scopeId": "",
+    "endorsementKey": "",
+    "symmetricKey": "",
+    "registrationId": "tbzeb1051950"
+  },
+  "downstreamCerts": {
+    "mode": "default",
+    "caCertFile": "",
+    "caPkFile": "",
+    "trustedCaFile": "",
+    "certificateInfo": null
+  },
+  "iotedge": null
+}

@@ -1,0 +1,12 @@
+{
+	"type": "openvpn",
+	"enable": false,
+	"status": false,
+	"profile": "",
+	"network": {
+		"remoteIp": "",
+		"localIp": "",
+		"netmask": "",
+		"gateway": ""
+	}
+}

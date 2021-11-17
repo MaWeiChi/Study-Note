@@ -135,6 +135,17 @@ func main() {
 
 	configJSONS, _ := json.MarshalIndent(store2, "", "  ")
 	WriteFile("/home/moxa/Study-Note/GO/GO_Map/s", configJSONS, 0644)
+
+	var data = map[string]map[string][]string{}
+
+	data["a"] = map[string][]string{}
+	data["b"] = make(map[string][]string)
+	data["c"] = make(map[string][]string)
+
+	data["a"]["w"] = []string{"x"}
+	data["b"]["w"] = []string{"x"}
+	data["c"]["w"] = []string{"x"}
+	fmt.Println(data)
 }
 
 func WriteFile(filename string, data []byte, perm os.FileMode) error {

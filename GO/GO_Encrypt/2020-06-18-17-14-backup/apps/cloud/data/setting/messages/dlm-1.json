@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "description": "",
+    "outputTopic": "dlm/3bc47bd7-4f58-4893-91ec-016aac435e3e/sysmsg",
+    "properties": null,
+    "tags": {
+      "events": {
+        "system": [
+          "ota download failed",
+          "ota download suspend",
+          "ota download resume",
+          "ota download completed",
+          "ota download cancel"
+        ]
+      }
+    },
+    "sendOutThreshold": {
+      "mode": "immediately",
+      "size": 0,
+      "time": 0,
+      "sizeIdleTimer": {
+        "enable": false,
+        "time": 0
+      }
+    },
+    "minPublishInterval": 0,
+    "samplingMode": "allValues",
+    "customSamplingRate": false,
+    "pollingInterval": 0,
+    "onChange": false,
+    "enable": true,
+    "format": "{data:[{projectId:env.DLM_PROJECT_ID,deviceSn:env.DLM_DEVICE_SN,category:.srcName,createdAt:(.ts/1000000|todateiso8601),event:.tagName,message:.dataValue,username:.eventUser,severity:.eventSeverity}]}"
+  },
+  {
+    "id": 2,
+    "description": "",
+    "outputTopic": "dlm/3bc47bd7-4f58-4893-91ec-016aac435e3e/d2cmsg",
+    "properties": null,
+    "tags": {
+      "events": {}
+    },
+    "sendOutThreshold": {
+      "mode": "byTime",
+      "size": 0,
+      "time": 60,
+      "sizeIdleTimer": {
+        "enable": false,
+        "time": 0
+      }
+    },
+    "minPublishInterval": 0,
+    "samplingMode": "allValues",
+    "customSamplingRate": false,
+    "pollingInterval": 0,
+    "onChange": false,
+    "enable": true,
+    "format": "select(.eventSeverity!=\"info\")|{data:[{projectId:env.DLM_PROJECT_ID,deviceSn:env.DLM_DEVICE_SN,category:.srcName,createdAt:(.ts/1000000|todateiso8601),event:.tagName,message:.dataValue,username:.eventUser,severity:.eventSeverity}]}"
+  },
+  {
+    "id": 3,
+    "description": "",
+    "outputTopic": "dlm/3bc47bd7-4f58-4893-91ec-016aac435e3e/dashboard",
+    "properties": [
+      {
+        "key": "class",
+        "value": "dashboard"
+      }
+    ],
+    "tags": {
+      "remote-ctrl": {},
+      "system": {
+        "network": [
+          "networkTx",
+          "networkRx"
+        ],
+        "status": [
+          "cpuUsage",
+          "memoryUsage"
+        ]
+      }
+    },
+    "sendOutThreshold": {
+      "mode": "bySize",
+      "size": 5120,
+      "time": 0,
+      "sizeIdleTimer": {
+        "enable": true,
+        "time": 10
+      }
+    },
+    "minPublishInterval": 0,
+    "samplingMode": "allValues",
+    "customSamplingRate": true,
+    "pollingInterval": 10,
+    "onChange": false,
+    "enable": false,
+    "format": ""
+  }
+]

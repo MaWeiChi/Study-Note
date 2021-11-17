@@ -1,0 +1,12 @@
+{
+  "enable": false,
+  "enableDM": true,
+  "nodeID": "",
+  "groupID": "",
+  "uuid": "",
+  "primaryHostID": "",
+  "handshakeTimeout": 10,
+  "retryInterval": 60,
+  "maxRetries": 3,
+  "brokerList": []
+}

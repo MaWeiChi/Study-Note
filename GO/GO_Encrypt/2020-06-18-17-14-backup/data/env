@@ -1,0 +1,10 @@
+ota={"allowOverCellular":true,"enableClientAuth":false,"enableSnapshot":false,"certFileName":"","keyFileName":"","caName":"","retryCount":3,"retryInterval":5,"targetDiskName":"System"}
+provisionConfiguration={"enable":false,"schedule":{"enable":true,"disableAfterSec":900}}
+serialConsoleConfiguration={"enable":true}
+journald={"enable":true,"enableTimeToLiveSec":false,"targetDiskName":"System","desiredDiskCacheSizeMB":100,"timeToLiveSec":604800}
+eventConfiguration={"enable":true,"targetDiskName":"System","desiredDiskCacheSizeMB":100,"enableTimeToLiveSec":false,"timeToLiveSec":604800,"reachThresholdPolicy":"rotate"}
+localHosts=10.123.13.18,192.168.4.20,192.168.5.1,127.0.0.1
+reboot={"enableScheduler":false,"now":false,"at":null,"nextTriggerAt":null}
+DiscoveryConfiguration={"enable":false}
+httpConfiguration={"httpEnable":true,"httpsEnable":true,"ipv6Enable":false,"httpPort":80,"httpsPort":8443,"certFileName":"default.crt","keyFileName":"default.key"}
+sshConfiguration={"enable":true,"port":22}

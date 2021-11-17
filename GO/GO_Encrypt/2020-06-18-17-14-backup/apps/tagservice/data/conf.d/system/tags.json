@@ -1,0 +1,326 @@
+[
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuUser",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "storage",
+  "tagName": "systemDiskFree",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryTotal",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuIdle",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuSystem",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuSteal",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "lan1NetworkUsage",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "lan1NetworkTx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "networkUsage",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "lan1NetworkRx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryBuffers",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryUsed",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "lan2NetworkTx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "wi-fi1NetworkTx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "networkTx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "storage",
+  "tagName": "systemDiskUsed",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuSoftirq",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryUsage",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "cellular1NetworkTx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuIowait",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryFree",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "networkRx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "gpsSignal",
+  "dataType": "string",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "wi-fi1NetworkRx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "lan2NetworkRx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "cellular1NetworkRx",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "lan2NetworkUsage",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "storage",
+  "tagName": "systemDiskPercent",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuUsage",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuIrq",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryShared",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "cellular1NetworkUsage",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryAvailable",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "memoryCached",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "network",
+  "tagName": "wi-fi1NetworkUsage",
+  "dataType": "uint64",
+  "dataSize": 0,
+  "dataUnit": "B",
+  "access": "r"
+ },
+ {
+  "prvdName": "system",
+  "srcName": "status",
+  "tagName": "cpuNice",
+  "dataType": "double",
+  "dataSize": 0,
+  "dataUnit": "",
+  "access": "r"
+ }
+]

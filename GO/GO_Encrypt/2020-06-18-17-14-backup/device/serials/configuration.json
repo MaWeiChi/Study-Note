@@ -1,0 +1,127 @@
+{
+  "@data": [
+    {
+      "baudRate": 9600,
+      "capabilities": {
+        "baudRate": {
+          "range": [
+            300,
+            600,
+            1200,
+            1800,
+            2400,
+            4800,
+            9600,
+            19200,
+            38400,
+            57600,
+            115200,
+            230400,
+            460800,
+            921600
+          ],
+          "special": false
+        },
+        "dataBits": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "flowControl": [
+          "none",
+          "hardware",
+          "software"
+        ],
+        "mode": [
+          "rs232",
+          "rs422",
+          "rs4852w",
+          "rs4854w"
+        ],
+        "parities": [
+          "none",
+          "odd",
+          "even",
+          "space",
+          "mark"
+        ],
+        "stopBits": [
+          1,
+          2
+        ]
+      },
+      "dataBits": 8,
+      "device": "/dev/ttyM0",
+      "displayName": "COM1",
+      "flowControl": "none",
+      "id": 1,
+      "mode": "rs232",
+      "parity": "none",
+      "stopBits": 1,
+      "type": "serials"
+    },
+    {
+      "baudRate": 9600,
+      "capabilities": {
+        "baudRate": {
+          "range": [
+            300,
+            600,
+            1200,
+            1800,
+            2400,
+            4800,
+            9600,
+            19200,
+            38400,
+            57600,
+            115200,
+            230400,
+            460800,
+            921600
+          ],
+          "special": false
+        },
+        "dataBits": [
+          5,
+          6,
+          7,
+          8
+        ],
+        "flowControl": [
+          "none",
+          "hardware",
+          "software"
+        ],
+        "mode": [
+          "rs232",
+          "rs422",
+          "rs4852w",
+          "rs4854w"
+        ],
+        "parities": [
+          "none",
+          "odd",
+          "even",
+          "space",
+          "mark"
+        ],
+        "stopBits": [
+          1,
+          2
+        ]
+      },
+      "dataBits": 8,
+      "device": "/dev/ttyM1",
+      "displayName": "COM2",
+      "flowControl": "none",
+      "id": 2,
+      "mode": "rs232",
+      "parity": "none",
+      "stopBits": 1,
+      "type": "serials"
+    }
+  ],
+  "@version": 1
+}

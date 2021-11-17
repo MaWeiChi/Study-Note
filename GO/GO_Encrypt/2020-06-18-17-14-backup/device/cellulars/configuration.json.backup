@@ -1,0 +1,28 @@
+{
+  "@data": [
+    {
+      "type": "cellulars",
+      "wan": true,
+      "displayName": "Cellular1",
+      "capabilities": {
+        "sim": 2
+      },
+      "available": true,
+      "id": 1,
+      "profileTimeout": 120,
+      "enable": true,
+      "keepalive": {
+        "intervalSec": 60,
+        "enable": true,
+        "targetHost": "8.8.8.8",
+        "reboot": {
+          "enable": false,
+          "intervalMin": 20
+        }
+      },
+      "autoDetect": true,
+      "profiles": []
+    }
+  ],
+  "@version": 1
+}

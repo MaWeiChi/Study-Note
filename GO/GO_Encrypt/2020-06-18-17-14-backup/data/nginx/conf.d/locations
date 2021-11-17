@@ -1,0 +1,6 @@
+location /favicon.ico {
+  log_not_found off;
+}
+
+include locations/*[.]conf;
+include locations/*[.]conf.system;

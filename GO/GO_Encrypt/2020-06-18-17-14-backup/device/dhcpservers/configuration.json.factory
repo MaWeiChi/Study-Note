@@ -1,0 +1,50 @@
+{
+  "@data": [
+    {
+      "type": "dhcpservers",
+      "id": 1,
+      "available": false,
+      "status": false,
+      "name": "eth0",
+      "displayName": "LAN1",
+      "enable": false,
+      "startIp": "192.168.3.200",
+      "endIp": "192.168.3.250",
+      "netmask": "255.255.255.0",
+      "domainNameServers": ["8.8.8.8", "8.8.4.4"],
+      "domainName": "",
+      "leaseTime": 3600
+    },
+    {
+      "type": "dhcpservers",
+      "id": 2,
+      "available": false,
+      "status": false,
+      "name": "eth1",
+      "displayName": "LAN2",
+      "enable": false,
+      "startIp": "192.168.4.200",
+      "endIp": "192.168.4.250",
+      "netmask": "255.255.255.0",
+      "domainNameServers": ["8.8.8.8", "8.8.4.4"],
+      "domainName": "",
+      "leaseTime": 3600
+    },
+    {
+      "type": "dhcpservers",
+      "id": 3,
+      "available": false,
+      "status": false,
+      "name": "wlan0",
+      "displayName": "Wi-Fi1",
+      "enable": true,
+      "startIp": "192.168.5.101",
+      "endIp": "192.168.5.200",
+      "netmask": "255.255.255.0",
+      "domainNameServers": [],
+      "domainName": "",
+      "leaseTime": 3600
+    }
+  ],
+  "@version": 1
+}
