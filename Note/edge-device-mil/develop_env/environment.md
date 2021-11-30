@@ -151,6 +151,6 @@ journalctl APPNAME=device -f -a
 
 enter device app
 
-```[bash]
+```[bash ]
 docker exec -ti device_app_1 bash
 ```
