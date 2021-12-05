@@ -20,19 +20,24 @@ phy#0
                 txpower 0.00 dBm
 ```
 
-### config setting
+## config setting
 
 append the two lines in the ```/etc/network/interfaces``` ([reference](https://manpages.debian.org/stretch/ifupdown2/interfaces.5.en.html)) :
 
-```
+```bash
 auto wlan0
 iface wlan0 inet dhcp
 ```
 
 create config `/etc/wpa_supplicant/wpa_supplicant.conf` ([reference](https://w1.fi/cgit/hostap/plain/wpa_supplicant/wpa_supplicant.conf)) :
 
-```
+```bash
 ctrl_interface=/var/run/wpa_supplicant
 update_config=1
 ```
 
+luanch
+
+```bash
+wpa_supplicant -D nl80211 -i wlan0 -c /etc/wpa_supplicant.conf -B
+```
