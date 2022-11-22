@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"fmt"
+	"io"
 	"math/rand"
 	"net"
 	"os"
@@ -33,7 +35,12 @@ func main() {
 	createUDPClient("127.0.0.1:1234")
 }
 
-func createConnect(serverOpt ServerItem, clientOpt ClientItem) {
+func createConnect(serverOpt ServerItem, clientOpt ClientItem, ctx context.Context) {
+	var serverConn, clientConn net.Conn
+	var err error
+
+	defer serverConn.Close()
+	defer clientConn.Close()
 
 	if serverOpt.Protocol == "tcp" {
 		s, err := net.ResolveTCPAddr("tcp", strconv.Itoa(serverOpt.Port))
@@ -47,14 +54,65 @@ func createConnect(serverOpt ServerItem, clientOpt ClientItem) {
 			return
 		}
 		defer l.Close()
+		serverConn, err = l.Accept()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	} else if serverOpt.Protocol == "udp" {
+		s, err := net.ResolveUDPAddr("udp4", strconv.Itoa(serverOpt.Port))
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-		c, err := l.Accept()
+		serverConn, err = net.ListenUDP("udp4", s)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 	}
 
+	addr := clientOpt.Host + ":" + strconv.Itoa(clientOpt.Port)
+	if clientOpt.Protocol == "tcp" {
+		clientConn, err = net.Dial("tcp", addr)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		clientConn.Close()
+	} else if clientOpt.Protocol == "udp" {
+		s, err := net.ResolveUDPAddr("udp4", addr)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		clientConn, err = net.DialUDP("udp4", nil, s)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}
+
+	go func() {
+		for {
+			// server -> client
+			io.Copy(clientConn, serverConn)
+			if err == io.EOF {
+				fmt.Println(err)
+				serverConn, err = l.Accept()
+
+			}
+
+		}
+	}()
+	go func() {
+		io.Copy(serverConn, clientConn)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+	}()
 }
 
 func createTCPServer(port string) (err error) {
